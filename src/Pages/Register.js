@@ -1,12 +1,15 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import {useNavigate} from 'react-router-dom';
+// import {toast, ToastContainer} from 'react-toastify'
 
 function Register() {
 
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
   const [email, setEmail] = useState(null);
+  const [confrimPassword, setConfrimPassword] = useState();
+  const [isError, setIsError] = useState()
 
   const navigate = useNavigate();
 
@@ -42,7 +45,19 @@ function Register() {
     pk1.value = "";
     let pk2 = document.getElementById('password');
     pk2.value = "";
+    let pk3 = document.getElementById('confpassword');
+    pk3.value = "";
 
+  }
+
+  const checkValidate = (e) => {
+    const confPassword = e.target.value;
+    setConfrimPassword(confPassword);
+    if(password !== confPassword){
+      setIsError("Password Should be Match ! So Please Check!!!");
+    }else{
+      setIsError("");
+    }
   }
 
 
@@ -78,6 +93,15 @@ function Register() {
                     <label for="password">Password</label>
                   </div>
                 </div>
+
+                <div className="row">
+                  <div className="input-field col s12">
+                    <i className='material-icons prefix'>visibility</i>
+                    <input id="confpassword" type="password" className="validate" required name='confpassword' onChange={(e) => checkValidate(e)}/>
+                    <label for="confpassword">ConfrimPassword</label>
+                  </div>
+                </div>
+                  <div className='center' style={{color : "red", fontsize : "20px"}}>{isError}</div>
                 </div>
                 <div className='card-action center'>
                   <button className='btn' type='submit'>Register</button>

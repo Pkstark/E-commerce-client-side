@@ -51,15 +51,20 @@ function Login() {
                 <div className='card-content'>
                 <div className="row">
                   <div className="input-field col s12">
+                  <i className='material-icons prefix'>account_circle</i>
                     <input id="username" type="text" className="validate" name='username' onChange={(e) => setUsername(e.target.value)} required/>
                     <label for="username">Username</label>
                   </div>
                 </div>
                 <div className="row">
                   <div className="input-field col s12">
+                  <i className='material-icons prefix'>visibility</i>
                     <input id="password" type="password" className="validate" name='password' onChange={(e) => setPassword(e.target.value)} required/>
                     <label for="password">Password</label>
                   </div>
+                </div>
+                <div className='center'>
+                  <a  style={{color : "red"}} href="/forgetpass">Forget Password ? </a>
                 </div>
                 </div>
                 <div className='card-action center'><br/>

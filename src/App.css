@@ -1,3 +1,25 @@
 .style1{
     font-size: 20px;
 }
+.style2{
+    font-size: 25px;
+}
+.style3{
+    width: 100px;
+    top: 1%;
+}
+.style4{
+    width: 250px;
+    margin-left: 20px;
+}
+.style5{
+    color : white
+}
+.style6{
+    margin-top: 80px;
+}
+.style7{
+    width: 150px;
+    height: 50px;
+    padding: 5px;
+}
