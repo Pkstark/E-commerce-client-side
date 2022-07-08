@@ -4,9 +4,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Register from "./Pages/Register";
 import Login from './Pages/Login';
 import Dashboard from "./Pages/Dashboard";
-import Mytodos from './Pages/Mytodos';
 import Resetpassword from './Pages/Resetpassword';
 import Forgetpassword from './Pages/Forgetpassword';
+import Todos from './Pages/Todos';
 
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
           <Route path='/dashboard/:id' element={<Dashboard/>}/>
           <Route path='/resetpassword/:id/:token' element={<Resetpassword/>}/>
           <Route path='/forgetpass' element={<Forgetpassword/>}/>
-          <Route path='/mytodo/:id' element={<Mytodos/>}/>
+          <Route path = '/Todos/:id' element ={<Todos/>}/>
         </Routes>
       </BrowserRouter>
     </>
