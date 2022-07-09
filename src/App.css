@@ -5,9 +5,7 @@
     font-size: 25px;
 }
 .style3{
-    width: 100px;
-    top: 1%;
-    height: 20px;
+    margin-top: 1%;
 }
 .style4{
     width: 250px;
@@ -30,4 +28,15 @@
 .style8{
     margin-top: 1%;
     transform: perspective(100px) translateX(-30px);
+}
+.style9{
+    margin-top: 1%;
+    transform: perspective(100px) translateX(-50px);
+}
+.style10{
+    margin-top: 1%;
+}
+.style11{
+    margin-top: 1%;
+    transform: perspective(100px) translateX(-50px);
 }

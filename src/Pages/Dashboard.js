@@ -9,7 +9,7 @@ function Dashboard() {
   console.log(useparams)
 
 
-  const [reset, setReset] = useState(null);
+  const [emailupdate, setEmailupdate] = useState(null);
 
 
 
@@ -37,13 +37,13 @@ const updatedPass = (e) => {
 
     const dd = {
         username : useparams.id,
-        password : reset
+        email : emailupdate
     }
     console.log(dd);
 
-    axios.put("http://localhost:8000/PasswordUpdate", dd).then((data) => {
+    axios.put(`http://localhost:8000/updateuser/${useparams.id}`, dd).then((data) => {
         if(data){
-            alert(data);
+            alert("Updated");
         }else{
             console.log("wrong")
         }
@@ -76,6 +76,19 @@ const Logout = () => {
 const pass = () => {
     navigate('/forgetpass')
 }
+
+
+const pass1 = () => {
+    navigate(`/product/${useparams.id}`);
+}
+
+const ll = () => {
+    var elems = document.querySelectorAll('.modal');
+    var trigg = M.Modal.init(elems, {});
+  }
+
+
+
   return (
   
   <>
@@ -85,6 +98,7 @@ const pass = () => {
             <div>
             <a href="/rr" className="brand-logo left">Devship</a>
             <button className='btn indigo right style3 sidenav-trigger' onClick={activate} data-target ="resposive" >Profile</button>
+            <button className='btn indigo right style9' onClick={pass1}>Products</button>
             </div>
         </div>
         </nav>
@@ -92,6 +106,7 @@ const pass = () => {
         <h4 className='center' style={{color : "white"}}>DevShip</h4>
         <div className='style6'>
             {/* <li> <button className='btn indigo style4 modal-trigger' data-target="change4" onClick={Trig}>Account</button></li><br/><br/> */}
+            <li> <button className='btn indigo style4 modal-trigger' data-target="change4" onClick={ll} ><a href='#change' className='style5'>Profile Update</a></button></li><br/><br/>
             <li> <button className='btn indigo style4 modal-trigger' data-target="change3" onClick={pass} ><a href='#change' className='style5'>Forget Password</a></button></li><br/><br/>
             {/* <li> <button className='btn indigo style4 modal-trigger' data-target="change" onClick={Trig}> Add Todos</button></li><br/><br/> */}
             <li> <button className='btn indigo style4 ' onClick={navi} >Todos</button></li><br/><br/>
@@ -102,11 +117,11 @@ const pass = () => {
 
 
 
-        <div id="change3" className="modal">
+        <div id="change4" className="modal">
     <form onSubmit={updatedPass}>
         <div className="modal-content">
-            <h4 className='center'>Change Password</h4>
-            <input type="text" id='del' placeholder = "Enter a New Password" onChange={(e) => setReset(e.target.value)}  required/>
+            <h4 className='center'>Update Profile</h4>
+            <input type="text" id='del' placeholder = "Enter a New email" onChange={(e) => setEmailupdate(e.target.value)}  required/>
         </div>
         <div className="modal-footer">
             <button type='submit' className='btn mod modal-close'>Update</button>
@@ -127,6 +142,20 @@ const pass = () => {
         </div>
     </form>
     </div>
+
+{/* 
+    <div id="change4" className="modal">
+    <form onSubmit={updatedPass}>
+        <div className="modal-content">
+            <h4 className='center'>Change Password</h4>
+            <input type="text" id='del' placeholder = "Enter a New Password" onChange={(e) => setReset(e.target.value)}  required/>
+        </div>
+        <div className="modal-footer">
+            <button type='submit' className='btn mod modal-close'>Update</button>
+        </div>
+    </form>
+    </div> */}
+
 
     <div className='container'>
       <div className='card '>

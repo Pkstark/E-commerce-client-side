@@ -4,7 +4,8 @@ import axios from 'axios'
 
 function Resetpassword() {
 
-  const useparams = useParams();
+  const useparams = useParams("id");
+  console.log(useparams)
   const navigate = useNavigate();
 
   const [resetPassword, setResetPassword] = useState({password : ""})

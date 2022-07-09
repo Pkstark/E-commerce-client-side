@@ -17,7 +17,7 @@ const Verified = async (e) => {
         console.log(data)
       }
       if(data.data.status === true){
-        alert("Success mail send");      
+        alert("Success mail send");
       }
     }
 
