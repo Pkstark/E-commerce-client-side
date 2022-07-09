@@ -4,9 +4,10 @@ import axios from 'axios'
 
 function Resetpassword() {
 
-  const useparams = useParams("id");
+  const useparams = useParams();
   console.log(useparams)
   const navigate = useNavigate();
+  console.log(useparams.token)
 
   const [resetPassword, setResetPassword] = useState({password : ""})
 
@@ -17,11 +18,13 @@ function Resetpassword() {
       const {password} = resetPassword;
 
       const data = await axios.post(`http://localhost:8000/resetpassword/${useparams.id}/${useparams.token}`,{password})
-
-      console.log(data)
-      navigate("/login")
+      if (data.data.status !== true){
+        alert("wrong")
+      }
+      if(data.data.status === true){
+        alert("success")
+      }
     }
-
     let tt = document.getElementById('email');
     tt.value="";
   }
@@ -42,13 +45,13 @@ function Resetpassword() {
   }
   return (
     <div className='container'>
-      <form onSubmit={resetPassHandler}>
+      <form onSubmit={(e) => resetPassHandler(e)}>
           <div className='card '>
             <div className='card-content'>
               <h4 className='center'>Reset Password</h4><br/><br/>
               <div className="input-field col s12">
                   <i className='material-icons prefix'>visibility</i>
-                    <input id="email" type="text" className="validate" required name='password' onChange={(e) => PassVal(e)}/>
+                    <input id="email" type="password" className="validate" required name='password' onChange={(e) => PassVal(e)}/>
                     <label for="email">Reset Password</label>
               </div>
             </div><br/><br/>

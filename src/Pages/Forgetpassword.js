@@ -13,11 +13,11 @@ const Verified = async (e) => {
 
       const data = await axios.post("http://localhost:8000/forgetpass", {email})
       if(data.data.status !== true){
-        alert("something wrong");
+        alert("wrong");
         console.log(data)
       }
       if(data.data.status === true){
-        alert("Success mail send");
+        alert("success");
       }
     }
 
@@ -43,7 +43,7 @@ const valuesHandle = (e) => {
 
   return (
     <div className='container'>
-          <form onSubmit={Verified}>
+          <form onSubmit={(e)=>Verified(e)}>
           <div className='card '>
             <div className='card-content'>
               <h4 className='center'>Forget Password</h4><br/><br/>
