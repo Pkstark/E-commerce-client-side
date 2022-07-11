@@ -96,7 +96,6 @@ const tt = (e) => {
       </div>
     </div>
   </div>
-
     </div>
   )
 }

@@ -21,17 +21,21 @@ const rr = () => {
 
 useEffect(() => {
     
-  axios.get("http://localhost:8000/shoedata").then((data) => {
-    setuserData(data.data.data);
+  axios.get("http://localhost:8000/shdata").then((data) => {
+    setuserData(data.data);
   }).catch((err) => {
     console.log(err)
   })
 }, [])
 
-
 const tt = (e) => {
   e.preventDefault();
   navigate(`/cart/${useparams.id}`);
+}
+
+const kk = (e) => {
+  e.preventDefault();
+  navigate(`/product/${useparams.id}`);
 }
 
 
@@ -44,6 +48,7 @@ const tt = (e) => {
         <div className="container">
           <div>
             <a href="/rr" className="brand-logo left">Devship</a>
+            <button className='btn indigo right style12' onClick={kk}>Catagroy</button>
             <button className='btn indigo right style10' onClick={tt}>cart</button>
             <button className='btn indigo right style11' onClick={rr}>Dashboard</button>
           </div>
@@ -56,29 +61,29 @@ const tt = (e) => {
       </ul>
 
       <div className='container'>
+        <h4 className='center'>Shirts</h4>
         <div className='row s12'>
-          <form>
-          {userdata.map((datas) => {
+        {userdata.map((datas) => {
+          console.log(datas.photo)
                     return(<>
                     <div className='col s3'>
                       <div className='card'>
                         <div className='card-content'>
-                          <p>Product name  :&nbsp;&nbsp;&nbsp;{datas.shoename}</p>
+                          <img src={`http://localhost:8000/${datas.photo}`} style={{height : "200px" , width : "200px"}} alt="..."/>
+                          <p>Shoe name  :&nbsp;&nbsp;&nbsp;{datas.name}</p>
                           
-                          <p>product prize :&nbsp;&nbsp;&nbsp;{datas.shoeprize}</p>
+                          <p>Shoe prize :&nbsp;&nbsp;&nbsp;{datas.prize}</p>
                         </div>
                         <div className='card-action center'>
-                          <button className='btn'>Addcart</button>
+                          <button className='btn'>AddCart</button>&nbsp;
                         </div>
                       </div>
                       </div>
                     </>
                     )
             })}
-          </form>
         </div>
       </div>
-
     </div>
   )
 }
