@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import axios from 'axios';
+import Img from '../Assets/Mobilles.jpg';
+import Img1 from '../Assets/Shirts.jpg';
+import Img2 from '../Assets/shoes.jpg';
 
 function Dashboard() {
 
@@ -10,9 +13,22 @@ function Dashboard() {
 
 
   const [emailupdate, setEmailupdate] = useState(null);
+  const [userData, setUserData] = useState();
 
 
+  useEffect(() => {
+    const tt = {
+        username : useparams.id
+    }
 
+    axios.get("http://localhost:8000/dd",tt).then((data) => {
+        console.log(data);
+        setUserData(data.data);
+    }).catch((err) => {
+        console.log(err);
+    })
+  }, [])
+  
   const navigate = useNavigate();
 
   const activate = () => {
@@ -25,6 +41,21 @@ function Dashboard() {
     var trigg = M.Modal.init(elems, {});
   }
 
+  const ee = (e) => {
+    e.preventDefault();
+    navigate(`/shoes/${useparams.id}`)
+  }
+  
+  const ff = (e) => {
+    e.preventDefault();
+    navigate(`/Shirts/${useparams.id}`)
+  }
+  
+  const dd = (e) => {
+    e.preventDefault();
+    navigate(`/mobile/${useparams.id}`)
+  }
+  
 
  
 const navi =() =>{
@@ -76,17 +107,19 @@ const pass = () => {
     navigate('/forgetpass')
 }
 
+const pass2 = () => {
+    navigate(`/cart/${useparams.id}`);
+}
 
-const pass1 = () => {
-    navigate(`/product/${useparams.id}`);
+const posted = (e) => {
+    e.preventDefault();
+    navigate(`/order/${useparams.id}`);
 }
 
 const ll = () => {
     var elems = document.querySelectorAll('.modal');
     var trigg = M.Modal.init(elems, {});
   }
-
-
 
   return (
   
@@ -96,8 +129,9 @@ const ll = () => {
             <div className="container">
             <div>
             <a href="/rr" className="brand-logo left">Devship</a>
+            <button className='btn indigo right style14' onClick={posted}>MyOrders</button>
             <button className='btn indigo right style3 sidenav-trigger' onClick={activate} data-target ="resposive" >Profile</button>
-            <button className='btn indigo right style9' onClick={pass1}>Products</button>
+            <button className='btn indigo right style15' onClick={pass2}>Cart</button>
             </div>
         </div>
         </nav>
@@ -113,7 +147,6 @@ const ll = () => {
             <li> <button className='btn indigo style4' onClick={Logout}> Logout</button></li><br/><br/>
         </div>
         </ul>
-
 
 
         <div id="change4" className="modal">
@@ -154,19 +187,6 @@ const ll = () => {
         </div>
     </form>
     </div> */}
-
-
-    <div className='container'>
-      <div className='card '>
-        <div className='card-content center'>
-          <h4>Hello, {useparams.id}</h4>
-          <h5>Welcome to the Devship</h5>
-        </div>
-      </div>
-    </div>
-
-
-
     
     
     {/* Todo Added */}
@@ -241,6 +261,52 @@ const ll = () => {
 
 
     {/* Forget Passsword*/}
+
+    <div class="row container">
+    <h4 className='center'>Welcome to Devship, &nbsp;{useparams.id}</h4>
+    <p className='center style17'>Our Products</p>
+    <div class="col s4 ">
+      <div class="card">
+        <div class="card-image">
+          <img src={Img}/>
+        </div>
+        <div class="card-content center">
+            <h5>New Mobiles here</h5>
+        </div>
+        <div class="card-action center">
+          <button className='btn' onClick={dd}>View</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s4 ">
+      <div class="card">
+        <div class="card-image">
+          <img src={Img2} style = {{height : "340px"}}/>
+        </div>
+        <div class="card-content center">
+            <h5>New Shoes here</h5>
+        </div>
+        <div class="card-action center">
+          <button className='btn' onClick={ee}>View</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s4 ">
+      <div class="card">
+        <div class="card-image">
+          <img src={Img1} style = {{height : "340px"}}/>
+        </div>
+        <div class="card-content center">
+            <h5>New Shirts here</h5>
+        </div>
+        <div class="card-action center">
+          <button className='btn' onClick={ff}>View</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
     </>
   )

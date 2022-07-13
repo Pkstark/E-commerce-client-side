@@ -48,6 +48,7 @@ function Todos() {
      const [data, setData] = useState(null);
     
     useEffect(() => {
+      console.log(useparams)
         const pk = {
             username : useparams.id
         }
@@ -60,9 +61,6 @@ function Todos() {
         })
     }, [])
 
-    const pp = () => {
-      navigate(`/dashboard/${useparams.id}`)
-    }
 
     if(data === null){
         console.log("data not found");

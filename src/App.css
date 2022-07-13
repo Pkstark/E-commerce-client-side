@@ -31,16 +31,36 @@
 }
 .style9{
     margin-top: 1%;
-    transform: perspective(100px) translateX(-50px);
+    transform: perspective(100px) translateX(-20px);
 }
 .style10{
     margin-top: 1%;
 }
 .style11{
     margin-top: 1%;
-    transform: perspective(100px) translateX(-50px);
+    transform: perspective(100px) translateX(-70px);
 }
 .style12{
     margin-top: 1%;
     transform: perspective(100px) translateX(-400px);
+}
+.style13{
+    margin-top: 1%;
+    transform: perspective(100px) translateX(-100px);
+}
+.style14{
+    margin-top: 1%;
+    transform: perspective(100px) translateX(-270px);
+}
+.style15{
+    margin-top: 1%;
+    transform: perspective(100px) translateX(-200px);
+}
+.style16{
+    margin-top: 1%;
+    transform: perspective(100px) translateX(-150px);
+}
+.style17{
+    font-size: 20px;
+    
 }

@@ -40,7 +40,6 @@ const kk = (e) => {
 
 
 
-
   return (
     <div>
       
@@ -75,7 +74,21 @@ const kk = (e) => {
                           <p>Shoe prize :&nbsp;&nbsp;&nbsp;{datas.prize}</p>
                         </div>
                         <div className='card-action center'>
-                          <button className='btn'>AddCart</button>&nbsp;
+                          <button className='btn' onClick={() => {
+                            const pp = {
+                              username : useparams.id,
+                              name : datas.name,
+                              prize : datas.prize,
+                              photo : `http://localhost:8000/${datas.photo}`
+                            }
+
+                            axios.post(`http://localhost:8000/addcart/${useparams.id}`, pp).then((data) => {
+                              console.log(data);
+                              alert('posted')
+                            }).catch((err) => {
+                              console.log(err)
+                            })
+                          }}>AddCart</button>&nbsp;
                         </div>
                       </div>
                       </div>

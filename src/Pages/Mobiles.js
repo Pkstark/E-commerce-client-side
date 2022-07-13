@@ -40,7 +40,6 @@ useEffect(() => {
 }, [])
 
 
-
   return (
     <div>
       
@@ -72,11 +71,24 @@ useEffect(() => {
                         <div className='card-content'>
                           <img src={`http://localhost:8000/${datas.photo}`} style={{height : "200px" , width : "200px"}} alt="..."/>
                           <p>Mobile name  :&nbsp;&nbsp;&nbsp;{datas.name}</p>
-                          
                           <p>Mobile prize :&nbsp;&nbsp;&nbsp;{datas.prize}</p>
                         </div>
                         <div className='card-action center'>
-                          <button className='btn'>AddCart</button>&nbsp;
+                          <button className='btn' onClick={() => {
+                            const pp = {
+                              username : useparams.id,
+                              name : datas.name,
+                              prize : datas.prize,
+                              photo : `http://localhost:8000/${datas.photo}`
+                            }
+
+                            axios.post(`http://localhost:8000/addcart/${useparams.id}`, pp).then((data) => {
+                              console.log(data);
+                              alert('posted')
+                            }).catch((err) => {
+                              console.log(err)
+                            })
+                          }}>AddCart</button>&nbsp;
                         </div>
                       </div>
                       </div>

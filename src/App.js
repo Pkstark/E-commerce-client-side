@@ -12,6 +12,7 @@ import Mobiles from './Pages/Mobiles';
 import Shirts from './Pages/Shirts';
 import Shoe from './Pages/Shoe';
 import Cart from './Pages/Cart';
+import Order from './Pages/Order';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path='/shoes/:id' element={<Shoe/>}/>
           <Route path='/Shirts/:id' element={<Shirts/>}/>
           <Route path='/cart/:id' element={<Cart/>}/>
+          <Route path='/order/:id' element = {<Order/>}/>
         </Routes>
       </BrowserRouter>
     </>

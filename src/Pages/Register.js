@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 // import {toast, ToastContainer} from 'react-toastify'
 
 function Register() {
-
+  const useparams = useParams("id")
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
   const [email, setEmail] = useState(null);
@@ -107,6 +107,7 @@ function Register() {
                   <button className='btn' type='submit'>Register</button>
                 </div>
                 <p className='center'>Already Have a Account ? Please &nbsp; <a href='/login'>Login Here!!!</a></p><br/><br/>
+                <p className='center'>Guest Account &nbsp; <a href= {`/dashboard/${useparams.id}`}>Click</a></p><br/><br/>
               </form>
             </div>
           </div>
