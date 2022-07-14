@@ -6,6 +6,7 @@ import axios from 'axios';
 function Cart() {
 
   const [userData, setUserData] = useState([])
+  const [uData, setUData] = useState([])
 
   const useparams = useParams("id");
 
@@ -41,6 +42,23 @@ function Cart() {
     navigate(`/order/${useparams.id}`);
   }
 
+  const Values = localStorage.getItem("initial");
+  const Values1 = localStorage.getItem("name");
+  const Values2 = localStorage.getItem("prize");
+  const Values3 = localStorage.getItem("photo");
+  console.log(Values3)
+
+
+  const pass = (e) => {
+    e.preventDefault();
+    alert("Please Login");
+    navigate("/login")
+  }
+
+
+  
+
+
   return (
     <div>
       <nav class="nav-wraper indigo">
@@ -59,7 +77,7 @@ function Cart() {
       </ul>
 
 
-      {userData !== null ? (<div>
+      {Values === useparams.id ? (<div>
 
         <div className='container'>
           <div className='row s12'>
@@ -109,7 +127,22 @@ function Cart() {
             })}
           </div>
         </div>
-      </div>) : (<div>data not found</div>)}
+      </div>) : (<div>
+          <div className='container'>
+            <div className='row s12'>
+              <div className='col s3'>
+                <div className='card'>
+                  <div className='card-content'>
+                    <img src={`http://localhost:8000/${Values3}`} alt = "..." style={{height : "200px", width : "200px"}}/>
+                    <p>Product Name : {Values1}</p>
+                    <p>Product Prize : {Values2}</p>
+                    <button className='btn center' onClick={pass}>Order</button>                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>)}
 
 
     </div>
