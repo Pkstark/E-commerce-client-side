@@ -8,174 +8,180 @@ import Img2 from '../Assets/shoes.jpg';
 
 function Dashboard() {
 
-  const useparams = useParams("id");
-  console.log(useparams)
+    const useparams = useParams("id");
+    console.log(useparams)
 
 
-  const [emailupdate, setEmailupdate] = useState(null);
-  const [userData, setUserData] = useState();
+    const [emailupdate, setEmailupdate] = useState(null);
+    const [userData, setUserData] = useState();
+    const [searchProduct, setSearchProduct] = useState("");
 
 
-  useEffect(() => {
-    const tt = {
-        username : useparams.id
-    }
-
-    axios.get("http://localhost:8000/dd",tt).then((data) => {
-        console.log(data);
-        setUserData(data.data);
-    }).catch((err) => {
-        console.log(err);
-    })
-  }, [])
-  
-  const navigate = useNavigate();
-
-  const activate = () => {
-    var elems = document.querySelectorAll('.sidenav');
-    var trigger = M.Sidenav.init(elems, {});
-}
-
-  const Trig = () => {
-    var elems = document.querySelectorAll('.modal');
-    var trigg = M.Modal.init(elems, {});
-  }
-
-  const ee = (e) => {
-    e.preventDefault();
-    navigate(`/shoes/${useparams.id}`)
-  }
-  
-  const ff = (e) => {
-    e.preventDefault();
-    navigate(`/Shirts/${useparams.id}`)
-  }
-  
-  const dd = (e) => {
-    e.preventDefault();
-    navigate(`/mobile/${useparams.id}`)
-  }
-  
-
- 
-const navi =() =>{
-    navigate(`/Todos/${useparams.id}`)
-}
-
-const updatedPass = (e) => {
-    e.preventDefault();
-
-    const dd = {
-        username : useparams.id,
-        email : emailupdate
-    }
-    console.log(dd);
-
-    axios.put(`http://localhost:8000/updateuser/${useparams.id}`, dd).then((data) => {
-        if(data){
-            alert("Updated");
-        }else{
-            console.log("wrong")
+    useEffect(() => {
+        const tt = {
+            username: useparams.id
         }
-    })
-    
-let ll = document.getElementById('del');
-ll.value = "";
-}
 
-const deleteAccount = (e) => {
-    e.preventDefault();
+        axios.get("http://localhost:8000/dd", tt).then((data) => {
+            console.log(data);
+            setUserData(data.data);
+        }).catch((err) => {
+            console.log(err);
+        })
+    }, [])
 
-    const DeleteData = {
-        username : useparams.id
+    const navigate = useNavigate();
+
+    const activate = () => {
+        var elems = document.querySelectorAll('.sidenav');
+        var trigger = M.Sidenav.init(elems, {});
     }
 
-    axios.post("http://localhost:8000/AccDelete" , DeleteData).then((data) => {
-        console.log(data);
-        alert("user Successfully Deleted!!!");
-        navigate('/')
-    }).catch((err) => {
-        console.log(err)
-    })
-}
+    const Trig = () => {
+        var elems = document.querySelectorAll('.modal');
+        var trigg = M.Modal.init(elems, {});
+    }
 
-const Logout = () => {
-    navigate("/login")
-}
 
-const pass = () => {
-    navigate('/forgetpass')
-}
+    const Values = localStorage.getItem("initial");
 
-const pass2 = () => {
-    navigate(`/cart/${useparams.id}`);
-}
+    console.log(Values)
 
-const posted = (e) => {
-    e.preventDefault();
-    navigate(`/order/${useparams.id}`);
-}
+    const ee = (e) => {
+        e.preventDefault();
+        navigate(`/shoes/${useparams.id}`)
+    }
 
-const ll = () => {
-    var elems = document.querySelectorAll('.modal');
-    var trigg = M.Modal.init(elems, {});
-  }
+    const ff = (e) => {
+        e.preventDefault();
+        navigate(`/Shirts/${useparams.id}`)
+    }
 
-  return (
-  
-  <>
+    const dd = (e) => {
+        e.preventDefault();
+        navigate(`/mobile/${useparams.id}`)
+    }
 
-<nav class="nav-wraper indigo">
-            <div className="container">
-            <div>
-            <a href="/rr" className="brand-logo left">Devship</a>
-            <button className='btn indigo right style14' onClick={posted}>MyOrders</button>
-            <button className='btn indigo right style3 sidenav-trigger' onClick={activate} data-target ="resposive" >Profile</button>
-            <button className='btn indigo right style15' onClick={pass2}>Cart</button>
+
+
+    const navi = () => {
+        navigate(`/Todos/${useparams.id}`)
+    }
+
+    const updatedPass = (e) => {
+        e.preventDefault();
+
+        const dd = {
+            username: useparams.id,
+            email: emailupdate
+        }
+        console.log(dd);
+
+        axios.put(`http://localhost:8000/updateuser/${useparams.id}`, dd).then((data) => {
+            if (data) {
+                alert("Updated");
+            } else {
+                console.log("wrong")
+            }
+        })
+
+        let ll = document.getElementById('del');
+        ll.value = "";
+    }
+
+    const deleteAccount = (e) => {
+        e.preventDefault();
+
+        const DeleteData = {
+            username: useparams.id
+        }
+
+        axios.post("http://localhost:8000/AccDelete", DeleteData).then((data) => {
+            console.log(data);
+            alert("user Successfully Deleted!!!");
+            navigate('/')
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+
+    const Logout = () => {
+        navigate("/login")
+    }
+
+    const pass = () => {
+        navigate('/forgetpass')
+    }
+
+    const pass2 = () => {
+        navigate(`/cart/${useparams.id}`);
+    }
+
+    const posted = (e) => {
+        e.preventDefault();
+        navigate(`/order/${useparams.id}`);
+    }
+
+    const ll = () => {
+        var elems = document.querySelectorAll('.modal');
+        var trigg = M.Modal.init(elems, {});
+    }
+
+    return (
+
+        <>
+
+            <nav class="nav-wraper indigo">
+                <div className="container">
+                    <div>
+                        <a href="/rr" className="brand-logo left">Devship</a>
+                        <button className='btn indigo right style14' onClick={posted}>MyOrders</button>
+                        <button className='btn indigo right style3 sidenav-trigger' onClick={activate} data-target="resposive" >Profile</button>
+                        <button className='btn indigo right style15' onClick={pass2}>Cart</button>
+                    </div>
+                </div>
+            </nav>
+            <ul className="sidenav indigo" id="resposive"><br /><br />
+                <h4 className='center' style={{ color: "white" }}>DevShip</h4>
+                <div className='style6'>
+                    {/* <li> <button className='btn indigo style4 modal-trigger' data-target="change4" onClick={Trig}>Account</button></li><br/><br/> */}
+                    <li> <button className='btn indigo style4 modal-trigger' data-target="change4" onClick={ll} ><a href='#change' className='style5'>Profile Update</a></button></li><br /><br />
+                    <li> <button className='btn indigo style4 modal-trigger' data-target="change3" onClick={pass} ><a href='#change' className='style5'>Forget Password</a></button></li><br /><br />
+                    {/* <li> <button className='btn indigo style4 modal-trigger' data-target="change" onClick={Trig}> Add Todos</button></li><br/><br/> */}
+                    <li> <button className='btn indigo style4 ' onClick={navi} >Todos</button></li><br /><br />
+                    <li> <button className='btn indigo style4 modal-trigger' data-target="change2" onClick={Trig}>Delete Account</button> </li><br /><br />
+                    <li> <button className='btn indigo style4' onClick={Logout}> Logout</button></li><br /><br />
+                </div>
+            </ul>
+
+
+            <div id="change4" className="modal">
+                <form onSubmit={updatedPass}>
+                    <div className="modal-content">
+                        <h4 className='center'>Update Profile</h4>
+                        <input type="text" id='del' placeholder="Enter a New email" onChange={(e) => setEmailupdate(e.target.value)} required />
+                    </div>
+                    <div className="modal-footer">
+                        <button type='submit' className='btn mod modal-close'>Update</button>
+                    </div>
+                </form>
             </div>
-        </div>
-        </nav>
-        <ul className="sidenav indigo" id="resposive"><br/><br/>
-        <h4 className='center' style={{color : "white"}}>DevShip</h4>
-        <div className='style6'>
-            {/* <li> <button className='btn indigo style4 modal-trigger' data-target="change4" onClick={Trig}>Account</button></li><br/><br/> */}
-            <li> <button className='btn indigo style4 modal-trigger' data-target="change4" onClick={ll} ><a href='#change' className='style5'>Profile Update</a></button></li><br/><br/>
-            <li> <button className='btn indigo style4 modal-trigger' data-target="change3" onClick={pass} ><a href='#change' className='style5'>Forget Password</a></button></li><br/><br/>
-            {/* <li> <button className='btn indigo style4 modal-trigger' data-target="change" onClick={Trig}> Add Todos</button></li><br/><br/> */}
-            <li> <button className='btn indigo style4 ' onClick={navi} >Todos</button></li><br/><br/>
-            <li> <button className='btn indigo style4 modal-trigger' data-target="change2" onClick={Trig}>Delete Account</button> </li><br/><br/>
-            <li> <button className='btn indigo style4' onClick={Logout}> Logout</button></li><br/><br/>
-        </div>
-        </ul>
 
+            {/* Delete Account */}
 
-        <div id="change4" className="modal">
-    <form onSubmit={updatedPass}>
-        <div className="modal-content">
-            <h4 className='center'>Update Profile</h4>
-            <input type="text" id='del' placeholder = "Enter a New email" onChange={(e) => setEmailupdate(e.target.value)}  required/>
-        </div>
-        <div className="modal-footer">
-            <button type='submit' className='btn mod modal-close'>Update</button>
-        </div>
-    </form>
-    </div>
+            <div id="change2" className="modal">
+                <form>
+                    <div className="modal-content">
+                        <h4 className='center'>Delete Your Account</h4>
+                        <p className='center'>Are You Sure ? you wnat to Delete your Account...!!!</p>
+                    </div>
+                    <div className="modal-footer">
+                        <button type='submit' className='btn mod modal-close indigo' onClick={deleteAccount}>Delete</button>
+                    </div>
+                </form>
+            </div>
 
-    {/* Delete Account */}
-
-    <div id="change2" className="modal">
-    <form>
-        <div className="modal-content">
-            <h4 className='center'>Delete Your Account</h4>
-            <p className='center'>Are You Sure ? you wnat to Delete your Account...!!!</p>
-        </div>
-        <div className="modal-footer">
-            <button type='submit' className='btn mod modal-close indigo' onClick={deleteAccount}>Delete</button>
-        </div>
-    </form>
-    </div>
-
-{/* 
+            {/* 
     <div id="change4" className="modal">
     <form onSubmit={updatedPass}>
         <div className="modal-content">
@@ -187,11 +193,11 @@ const ll = () => {
         </div>
     </form>
     </div> */}
-    
-    
-    {/* Todo Added */}
 
-{/* 
+
+            {/* Todo Added */}
+
+            {/* 
         <div id="change" className="modal">
     <form onSubmit={DataSubmit} >
         <div className="modal-content">
@@ -204,7 +210,7 @@ const ll = () => {
     </form>
     </div> */}
 
-        {/* Overall Todo
+            {/* Overall Todo
 
     <div id="change1" className="modal">
     <form >
@@ -244,8 +250,8 @@ const ll = () => {
     </div>
  */}
 
-    {/* Account Details */}
-{/* 
+            {/* Account Details */}
+            {/* 
     <div id="change4" className="modal">
     <form >
         <div className="modal-content">
@@ -260,56 +266,60 @@ const ll = () => {
     </div> */}
 
 
-    {/* Forget Passsword*/}
+            {/* Forget Passsword*/}
 
-    <div class="row container">
-    <h4 className='center'>Welcome to Devship, &nbsp;{useparams.id}</h4>
-    <p className='center style17'>Our Products</p>
-    <div class="col s4 ">
-      <div class="card">
-        <div class="card-image">
-          <img src={Img}/>
-        </div>
-        <div class="card-content center">
-            <h5>New Mobiles here</h5>
-        </div>
-        <div class="card-action center">
-          <button className='btn' onClick={dd}>View</button>
-        </div>
-      </div>
-    </div>
+            <div class="row container">
+                {Values === useparams.id ? (<div className='center'>
+                    <h4 >Welcome to Devship, &nbsp;{Values}</h4>
+                </div>) : (<div>
+                    <p className='style18 center'>Please Register !!! You Don't have Account <a href='/'>Click here</a></p>
+                </div>)}
+                <p className='center style17'>Our Products</p>
+                <div class="col s4 ">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src={Img} />
+                        </div>
+                        <div class="card-content center">
+                            <h5>New Mobiles here</h5>
+                        </div>
+                        <div class="card-action center">
+                            <button className='btn' onClick={dd}>View</button>
+                        </div>
+                    </div>
+                </div>
 
-    <div class="col s4 ">
-      <div class="card">
-        <div class="card-image">
-          <img src={Img2} style = {{height : "340px"}}/>
-        </div>
-        <div class="card-content center">
-            <h5>New Shoes here</h5>
-        </div>
-        <div class="card-action center">
-          <button className='btn' onClick={ee}>View</button>
-        </div>
-      </div>
-    </div>
+                <div class="col s4 ">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src={Img2} style={{ height: "340px" }} />
+                        </div>
+                        <div class="card-content center">
+                            <h5>New Shoes here</h5>
+                        </div>
+                        <div class="card-action center">
+                            <button className='btn' onClick={ee}>View</button>
+                        </div>
+                    </div>
+                </div>
 
-    <div class="col s4 ">
-      <div class="card">
-        <div class="card-image">
-          <img src={Img1} style = {{height : "340px"}}/>
-        </div>
-        <div class="card-content center">
-            <h5>New Shirts here</h5>
-        </div>
-        <div class="card-action center">
-          <button className='btn' onClick={ff}>View</button>
-        </div>
-      </div>
-    </div>
-  </div>
+                <div class="col s4 ">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src={Img1} style={{ height: "340px" }} />
+                        </div>
+                        <div class="card-content center">
+                            <h5>New Shirts here</h5>
+                        </div>
+                        <div class="card-action center">
+                            <button className='btn' onClick={ff}>View</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    </>
-  )
+        </>
+    )
 }
 
 export default Dashboard

@@ -1,66 +1,92 @@
-.style1{
+.style1 {
     font-size: 20px;
 }
-.style2{
+
+.style2 {
     font-size: 25px;
 }
-.style3{
+
+.style3 {
     margin-top: 1%;
 }
-.style4{
+
+.style4 {
     width: 250px;
     margin-left: 20px;
 }
-.style5{
-    color : white
+
+.style5 {
+    color: white
 }
-.style6{
+
+.style6 {
     margin-top: 80px;
 }
-.style7{
+
+.style7 {
     width: 150px;
     height: 50px;
     padding: 5px;
 }
-.style{
+
+.style {
     margin-top: 1%;
 }
-.style8{
+
+.style8 {
     margin-top: 1%;
     transform: perspective(100px) translateX(-30px);
 }
-.style9{
+
+.style9 {
     margin-top: 1%;
     transform: perspective(100px) translateX(-20px);
 }
-.style10{
+
+.style10 {
     margin-top: 1%;
 }
-.style11{
+
+.style11 {
     margin-top: 1%;
     transform: perspective(100px) translateX(-70px);
 }
-.style12{
+
+.style12 {
     margin-top: 1%;
     transform: perspective(100px) translateX(-400px);
 }
-.style13{
+
+.style13 {
     margin-top: 1%;
     transform: perspective(100px) translateX(-100px);
 }
-.style14{
+
+.style14 {
     margin-top: 1%;
     transform: perspective(100px) translateX(-270px);
 }
-.style15{
+
+.style15 {
     margin-top: 1%;
     transform: perspective(100px) translateX(-200px);
 }
-.style16{
+
+.style16 {
     margin-top: 1%;
     transform: perspective(100px) translateX(-150px);
 }
-.style17{
+
+.style17 {
     font-size: 20px;
-    
+
+}
+
+.style18 {
+    font-size: 20px;
+}
+
+.style19 {
+    width: 100px;
+    text-align: center;
 }

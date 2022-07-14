@@ -20,18 +20,18 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Register/>}/>
-          <Route path='/login' element={<Login/>}/>
-          <Route path='/dashboard/:id' element={<Dashboard/>}/>
-          <Route path='/resetpassword/:id/:token' element={<Resetpassword/>}/>
-          <Route path='/forgetpass' element={<Forgetpassword/>}/>
-          <Route path = '/Todos/:id' element ={<Todos/>}/>
-          <Route path = '/product/:id' element ={<Product/>}/>
-          <Route path='/mobile/:id' element={<Mobiles/>}/>
-          <Route path='/shoes/:id' element={<Shoe/>}/>
-          <Route path='/Shirts/:id' element={<Shirts/>}/>
-          <Route path='/cart/:id' element={<Cart/>}/>
-          <Route path='/order/:id' element = {<Order/>}/>
+          <Route path='/' element={<Register />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/dashboard/:id' element={<Dashboard />} />
+          <Route path='/resetpassword/:id/:token' element={<Resetpassword />} />
+          <Route path='/forgetpass' element={<Forgetpassword />} />
+          <Route path='/Todos/:id' element={<Todos />} />
+          <Route path='/product/:id' element={<Product />} />
+          <Route path='/mobile/:id' element={<Mobiles />} />
+          <Route path='/shoes/:id' element={<Shoe />} />
+          <Route path='/Shirts/:id' element={<Shirts />} />
+          <Route path='/cart/:id' element={<Cart />} />
+          <Route path='/order/:id' element={<Order />} />
         </Routes>
       </BrowserRouter>
     </>

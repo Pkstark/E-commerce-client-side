@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 // import {toast, ToastContainer} from 'react-toastify'
 
 function Register() {
@@ -17,9 +17,9 @@ function Register() {
     e.preventDefault();
 
     const Details = {
-      username : username,
-      email : email,
-      password : password
+      username: username,
+      email: email,
+      password: password
     }
     console.log(Details);
 
@@ -27,9 +27,9 @@ function Register() {
 
     axios.post("http://localhost:8000/register", Details).then((data) => {
       console.log(data);
-      if (data.data.error){
+      if (data.data.error) {
         alert(data.data.error)
-      }else{
+      } else {
         navigate("/login");
         alert("registered successfully")
       }
@@ -53,9 +53,9 @@ function Register() {
   const checkValidate = (e) => {
     const confPassword = e.target.value;
     setConfrimPassword(confPassword);
-    if(password !== confPassword){
+    if (password !== confPassword) {
       setIsError("Password Should be Match ! So Please Check!!!");
-    }else{
+    } else {
       setIsError("");
     }
   }
@@ -70,44 +70,44 @@ function Register() {
               <form onSubmit={handleSubmit}>
                 <h4 className='center'>Register</h4>
                 <div className='card-content'>
-                <div className="row">
-                  <div className="input-field col s12">
-                  <i className='material-icons prefix'>account_circle</i>
-                    <input id="username" type="text" className="validate" required name='username' onChange={(e) => setUsername(e.target.value)}/>
-                    <label for="username">Username</label>
+                  <div className="row">
+                    <div className="input-field col s12">
+                      <i className='material-icons prefix'>account_circle</i>
+                      <input id="username" type="text" className="validate" required name='username' onChange={(e) => setUsername(e.target.value)} />
+                      <label for="username">Username</label>
+                    </div>
                   </div>
-                </div>
 
-                <div className="row">
-                  <div className="input-field col s12">
-                  <i className='material-icons prefix'>email</i>
-                    <input id="email" type="text" className="validate" required name='email' onChange={(e) => setEmail(e.target.value)}/>
-                    <label for="email">Email</label>
+                  <div className="row">
+                    <div className="input-field col s12">
+                      <i className='material-icons prefix'>email</i>
+                      <input id="email" type="text" className="validate" required name='email' onChange={(e) => setEmail(e.target.value)} />
+                      <label for="email">Email</label>
+                    </div>
                   </div>
-                </div>
 
-                <div className="row">
-                  <div className="input-field col s12">
-                    <i className='material-icons prefix'>visibility</i>
-                    <input id="password" type="password" className="validate" required name='password' onChange={(e) => setPassword(e.target.value)}/>
-                    <label for="password">Password</label>
+                  <div className="row">
+                    <div className="input-field col s12">
+                      <i className='material-icons prefix'>visibility</i>
+                      <input id="password" type="password" className="validate" required name='password' onChange={(e) => setPassword(e.target.value)} />
+                      <label for="password">Password</label>
+                    </div>
                   </div>
-                </div>
 
-                <div className="row">
-                  <div className="input-field col s12">
-                    <i className='material-icons prefix'>visibility</i>
-                    <input id="confpassword" type="password" className="validate" required name='confpassword' onChange={(e) => checkValidate(e)}/>
-                    <label for="confpassword">ConfrimPassword</label>
+                  <div className="row">
+                    <div className="input-field col s12">
+                      <i className='material-icons prefix'>visibility</i>
+                      <input id="confpassword" type="password" className="validate" required name='confpassword' onChange={(e) => checkValidate(e)} />
+                      <label for="confpassword">ConfrimPassword</label>
+                    </div>
                   </div>
-                </div>
-                  <div className='center' style={{color : "red", fontsize : "20px"}}>{isError}</div>
+                  <div className='center' style={{ color: "red", fontsize: "20px" }}>{isError}</div>
                 </div>
                 <div className='card-action center'>
                   <button className='btn' type='submit'>Register</button>
                 </div>
-                <p className='center'>Already Have a Account ? Please &nbsp; <a href='/login'>Login Here!!!</a></p><br/><br/>
-                <p className='center'>Guest Account &nbsp; <a href= {`/dashboard/${useparams.id}`}>Click</a></p><br/><br/>
+                <p className='center'>Already Have a Account ? Please &nbsp; <a href='/login'>Login Here!!!</a></p><br /><br />
+                <p className='center'>Guest Account &nbsp; <a href={`/dashboard/${useparams.id}`}>Click</a></p><br /><br />
               </form>
             </div>
           </div>
