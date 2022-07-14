@@ -116,10 +116,9 @@ function Mobiles() {
                       }}>AddCart</button>
                     </div>) : (<div>
                       <button className='btn center' onClick={() => {
-                          window.localStorage.setItem("name", datas.name);
-                          window.localStorage.setItem("prize", datas.prize);
-                          window.localStorage.setItem("photo", datas.photo);
-                          alert("data added please login")
+                        window.localStorage.setItem("name", datas.name)
+                        window.localStorage.setItem("prize", datas.prize)
+                        window.localStorage.setItem("photo", datas.photo)
                       }}>AddCart</button>
                     </div>)}
                     &nbsp;

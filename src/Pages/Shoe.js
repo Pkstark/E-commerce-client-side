@@ -12,8 +12,10 @@ function Mobiles() {
 
 
   const navigate = useNavigate();
+
   const Values = localStorage.getItem('initial');
   console.log(Values)
+
 
 
 
@@ -35,9 +37,16 @@ function Mobiles() {
     navigate(`/cart/${useparams.id}`);
   }
 
+  const kk = (e) => {
+    e.preventDefault();
+    navigate(`/product/${useparams.id}`);
+  }
+
+
 
   return (
     <div>
+
       <nav class="nav-wraper indigo">
         <div className="container">
           <div>
@@ -70,28 +79,27 @@ function Mobiles() {
                   <div className='card-action center'>
                     {Values === useparams.id ? (<div>
                       <button className='btn' onClick={() => {
-                      const pp = {
-                        username: useparams.id,
-                        name: datas.name,
-                        prize: datas.prize,
-                        photo: `http://localhost:8000/${datas.photo}`
-                      }
+                        const pp = {
+                          username: useparams.id,
+                          name: datas.name,
+                          prize: datas.prize,
+                          photo: `http://localhost:8000/${datas.photo}`
+                        }
 
-                      axios.post(`http://localhost:8000/addcart/${useparams.id}`, pp).then((data) => {
-                        console.log(data);
-                        alert('posted')
-                      }).catch((err) => {
-                        console.log(err)
-                      })
-                    }}>AddCart</button>
+                        axios.post(`http://localhost:8000/addcart/${useparams.id}`, pp).then((data) => {
+                          console.log(data);
+                          alert('posted')
+                        }).catch((err) => {
+                          console.log(err)
+                        })
+                      }}>AddCart</button>
                     </div>) : (<div>
                       <button className='btn center' onClick={() => {
-                          window.localStorage.setItem("name", datas.name);
-                          window.localStorage.setItem("prize", datas.prize);
-                          window.localStorage.setItem("photo", datas.photo);
-                          alert("data added please login")
+                        window.localStorage.setItem("name", datas.name)
+                        window.localStorage.setItem("prize", datas.prize)
+                        window.localStorage.setItem("photo", datas.photo)
                       }}>AddCart</button>
-                    </div>)}
+                    </div>)}&nbsp;
                   </div>
                 </div>
               </div>

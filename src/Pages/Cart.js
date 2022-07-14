@@ -6,7 +6,7 @@ import axios from 'axios';
 function Cart() {
 
   const [userData, setUserData] = useState([])
-  const [uData, setUData] = useState([])
+  // const [uData, setUData] = useState([])
 
   const useparams = useParams("id");
 
@@ -46,7 +46,8 @@ function Cart() {
   const Values1 = localStorage.getItem("name");
   const Values2 = localStorage.getItem("prize");
   const Values3 = localStorage.getItem("photo");
-  console.log(Values3)
+
+  // const Value = localStorage.getItem("list")
 
 
   const pass = (e) => {
@@ -132,10 +133,13 @@ function Cart() {
               <div className='col s3'>
                 <div className='card'>
                   <div className='card-content'>
-                    <img src={`http://localhost:8000/${Values3}`} alt = "..." style={{height : "200px", width : "200px"}}/>
+                    <img src={`http://localhost:8000/${Values3}`} style={{ height : "200px" , width : "200px"}}/>
                     <p>Product Name : {Values1}</p>
                     <p>Product Prize : {Values2}</p>
-                    <button className='btn center' onClick={pass}>Order</button>                    
+                    <button className='btn center' onClick={() =>{
+                      alert("please login");
+                      navigate("/login")
+                    }}>Order</button>
                   </div>
                 </div>
               </div>
