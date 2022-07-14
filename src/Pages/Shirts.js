@@ -13,6 +13,9 @@ function Mobiles() {
 
   const navigate = useNavigate();
 
+  const Values = localStorage.getItem('initial');
+  console.log(Values)
+
 
 
   const rr = () => {
@@ -70,7 +73,8 @@ function Mobiles() {
                     <p>Mobile prize :&nbsp;&nbsp;&nbsp;{datas.prize}</p>
                   </div>
                   <div className='card-action center'>
-                    <button className='btn' onClick={() => {
+                    {Values === useparams.id ? (<div>
+                      <button className='btn' onClick={() => {
                       const pp = {
                         username: useparams.id,
                         name: datas.name,
@@ -84,7 +88,15 @@ function Mobiles() {
                       }).catch((err) => {
                         console.log(err)
                       })
-                    }}>AddCart</button>&nbsp;
+                    }}>AddCart</button>
+                    </div>) : (<div>
+                      <button className='btn center' onClick={() => {
+                          window.localStorage.setItem("name", datas.name);
+                          window.localStorage.setItem("prize", datas.prize);
+                          window.localStorage.setItem("photo", datas.photo);
+                          alert("data added please login")
+                      }}>AddCart</button>
+                    </div>)}&nbsp;
                   </div>
                 </div>
               </div>

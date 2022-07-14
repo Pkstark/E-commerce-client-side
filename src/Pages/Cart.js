@@ -111,7 +111,6 @@ function Cart() {
                           photo: datas.photo,
                           paid: ""
                         }
-
                         axios.post(`http://localhost:8000/payment`, pp).then((data) => {
                           console.log(data);
                           alert('order Successfully!!!')
