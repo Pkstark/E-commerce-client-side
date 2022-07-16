@@ -70,7 +70,7 @@ function Todos() {
 
   return (
     <div>
-      <nav class="nav-wraper indigo">
+      <nav className="nav-wraper indigo">
         <div className="container">
           <div>
             <a href="/rr" className="brand-logo left">Devship</a>
@@ -125,7 +125,7 @@ function Todos() {
                             <span class="card-title">{datas.text}</span>
                           </div>
                           <div class="card-action">
-                            <a className="btn success " onClick={() => {
+                            <a className="btn success " href='ll' onClick={() => {
                               const ids = {
                                 ids: datas._id
                               }

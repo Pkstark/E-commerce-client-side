@@ -37,17 +37,17 @@ function Mobiles() {
     navigate(`/cart/${useparams.id}`);
   }
 
-  const kk = (e) => {
-    e.preventDefault();
-    navigate(`/product/${useparams.id}`);
-  }
+  // const kk = (e) => {
+  //   e.preventDefault();
+  //   navigate(`/product/${useparams.id}`);
+  // }
 
 
 
   return (
     <div>
 
-      <nav class="nav-wraper indigo">
+      <nav className="nav-wraper indigo">
         <div className="container">
           <div>
             <a href="/rr" className="brand-logo left">Devship</a>
@@ -74,7 +74,8 @@ function Mobiles() {
                     <img src={`http://localhost:8000/${datas.photo}`} style={{ height: "200px", width: "200px" }} alt="..." />
                     <p>Shoe name  :&nbsp;&nbsp;&nbsp;{datas.name}</p>
 
-                    <p>Shoe prize :&nbsp;&nbsp;&nbsp;{datas.prize}</p>
+                    <p>Product prize : Rs.&nbsp;&nbsp;&nbsp;<span className='style20'>{datas.prize}</span></p>
+                    <p>Offer Prize : Rs. {datas.offerprize}</p>
                   </div>
                   <div className='card-action center'>
                     {Values === useparams.id ? (<div>
@@ -83,6 +84,7 @@ function Mobiles() {
                           username: useparams.id,
                           name: datas.name,
                           prize: datas.prize,
+                          offerprize  :datas.offerprize,
                           photo: `http://localhost:8000/${datas.photo}`
                         }
 
@@ -97,7 +99,7 @@ function Mobiles() {
                       <button className='btn center' onClick={() => {
                         window.localStorage.setItem("name", datas.name)
                         window.localStorage.setItem("prize", datas.prize)
-                        window.localStorage.setItem("photo", datas.photo)
+                        window.localStorage.setItem("photo",`http://localhost:8000/${datas.photo}`)
                       }}>AddCart</button>
                     </div>)}&nbsp;
                   </div>

@@ -9,6 +9,8 @@ function Mobiles() {
   console.log(useparams)
 
   const [userdata, setuserData] = useState([])
+  
+  // const [Posted, setPosted] = useState("");
 
 
   const navigate = useNavigate();
@@ -39,11 +41,16 @@ function Mobiles() {
     navigate(`/cart/${useparams.id}`);
   }
 
+  // let handle = (datas) => {
+  //   setPosted([...Posted,datas]);
+  //   window.localStorage.setItem("list" , JSON.stringify(Posted))
+  // }
+
 
   return (
     <div>
 
-      <nav class="nav-wraper indigo">
+      <nav className="nav-wraper indigo">
         <div className="container">
           <div>
             <a href="/rr" className="brand-logo left">Devship</a>
@@ -70,7 +77,8 @@ function Mobiles() {
                     <img src={`http://localhost:8000/${datas.photo}`} style={{ height: "200px", width: "200px" }} alt="..." />
                     <p>Mobile name  :&nbsp;&nbsp;&nbsp;{datas.name}</p>
 
-                    <p>Mobile prize :&nbsp;&nbsp;&nbsp;{datas.prize}</p>
+                    <p>Product prize : Rs.&nbsp;&nbsp;&nbsp;<span className='style20'>{datas.prize}</span></p>
+                    <p>Offer Prize : Rs. {datas.offerprize}</p>
                   </div>
                   <div className='card-action center'>
                     {Values === useparams.id ? (<div>
@@ -79,6 +87,7 @@ function Mobiles() {
                         username: useparams.id,
                         name: datas.name,
                         prize: datas.prize,
+                        offerprize : datas.offerprize,
                         photo: `http://localhost:8000/${datas.photo}`
                       }
 
@@ -90,12 +99,18 @@ function Mobiles() {
                       })
                     }}>AddCart</button>
                     </div>) : (<div>
-                      <button className='btn center' onClick={() => {
+                      <button className='btn center' onClick={() =>
+                      {
+
+                        // setPosted([...Posted,datas])
+                        // window.localStorage.setItem("list",JSON.stringify(Posted))
+
                           window.localStorage.setItem("name", datas.name);
                           window.localStorage.setItem("prize", datas.prize);
-                          window.localStorage.setItem("photo", datas.photo);
+                          window.localStorage.setItem("photo", `http://localhost:8000/${datas.photo}`);
                           alert("data added please login")
-                      }}>AddCart</button>
+                      }}
+                      >AddCart</button>
                     </div>)}&nbsp;
                   </div>
                 </div>

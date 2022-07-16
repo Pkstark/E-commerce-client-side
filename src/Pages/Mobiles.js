@@ -9,7 +9,7 @@ function Mobiles() {
   console.log(useparams)
 
   const [userdata, setuserData] = useState([]);
-  const [Search, setSearch] = useState();
+  // const [cartItem, setCartItem] = useState("");
 
 
   const navigate = useNavigate();
@@ -30,7 +30,6 @@ function Mobiles() {
   }
 
   useEffect(() => {
-
     axios.get("http://localhost:8000/data").then((data) => {
       setuserData(data.data);
     }).catch((err) => {
@@ -38,16 +37,23 @@ function Mobiles() {
     })
   }, [])
 
-  const passed = (e) => {
-    alert(`you Don't have a Account Please Register`);
-    navigate('/')
-  }
+  // const passed = (e) => {
+  //   alert(`you Don't have a Account Please Register`);
+  //   navigate('/')
+  // }
 
+  // let handleCart = (datas) => {
+  //   setCartItem([...cartItem, datas]);
+  //   localStorage.setItem("cartList", JSON.stringify(cartItem));
+  //   alert("cart added")
+  // };
+
+  
 
   return (
     <div>
 
-      <nav class="nav-wraper indigo">
+      <nav className="nav-wraper indigo">
         <div className="container">
           <div>
             <a href="/rr" className="brand-logo left">Devship</a>
@@ -94,16 +100,17 @@ function Mobiles() {
                   <div className='card-content'>
                     <img src={`http://localhost:8000/${datas.photo}`} style={{ height: "200px", width: "200px" }} alt="..." />
                     <p>Mobile name  :&nbsp;&nbsp;&nbsp;{datas.name}</p>
-                    <p>Mobile prize :&nbsp;&nbsp;&nbsp;{datas.prize}</p>
+                    <p>Mobile prize : Rs.&nbsp;&nbsp;&nbsp;<span className='style20'>{datas.prize}</span></p>
+                    <p>Offer Prize : Rs. {datas.offerprize}</p>
                   </div>
                   <div className='card-action center'>
                     {Values === useparams.id ? (<div>
-
                       <button className='btn' onClick={() => {
                         const pp = {
                           username: useparams.id,
                           name: datas.name,
                           prize: datas.prize,
+                          offerprize: datas.offerprize,
                           photo: `http://localhost:8000/${datas.photo}`
                         }
 
@@ -115,11 +122,14 @@ function Mobiles() {
                         })
                       }}>AddCart</button>
                     </div>) : (<div>
-                      <button className='btn center' onClick={() => {
+                      <button className='btn center' onClick={() =>{
                         window.localStorage.setItem("name", datas.name)
                         window.localStorage.setItem("prize", datas.prize)
-                        window.localStorage.setItem("photo", datas.photo)
-                      }}>AddCart</button>
+                        window.localStorage.setItem("offerprize", datas.offerprize)
+                        window.localStorage.setItem("photo", `http://localhost:8000/${datas.photo}`)
+                        alert("cart added")
+                      }
+                      }>AddCart</button>
                     </div>)}
                     &nbsp;
                   </div>

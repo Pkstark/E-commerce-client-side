@@ -30,7 +30,7 @@ function Register() {
       if (data.data.error) {
         alert(data.data.error)
       } else {
-        navigate("/login");
+        navigate("/.login");
         alert("registered successfully")
       }
     }).catch((err) => {
@@ -60,11 +60,6 @@ function Register() {
     }
   }
 
-
-  const pk = "guest"
-  const guest = () => {
-    navigate(`/dashboard/${useparams,pk}`)
-  }
 
   return (
     <div>
@@ -111,8 +106,7 @@ function Register() {
                 <div className='card-action center'>
                   <button className='btn' type='submit'>Register</button>
                 </div>
-                <p className='center'>Already Have a Account ? Please &nbsp; <a href='/login'>Login Here!!!</a></p><br /><br />
-                <p className='center'>Guest Account &nbsp; <a href= "" onClick={guest}>Click</a></p><br /><br />
+                <p className='center'>Already Have a Account ? Please &nbsp; <a href='/.login'>Login Here!!!</a></p><br /><br />
               </form>
             </div>
           </div>

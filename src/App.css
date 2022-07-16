@@ -90,3 +90,7 @@
     width: 100px;
     text-align: center;
 }
+.style20{
+    text-decoration: line-through;
+    color: red;
+  }

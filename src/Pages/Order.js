@@ -20,6 +20,10 @@ function Order() {
   }
 
   useEffect(() => {
+    getData()
+  }, [])
+
+  const getData = () => {
     console.log(useparams)
     const pk = {
       username: useparams.id
@@ -31,7 +35,7 @@ function Order() {
       console.log(err)
       alert("something went to wrong")
     })
-  }, [])
+  }
 
   if (userData === null) {
     console.log("data not found");
@@ -42,7 +46,7 @@ function Order() {
   return (
     <div>
 
-      <nav class="nav-wraper indigo">
+      <nav className="nav-wraper indigo">
         <div className="container">
           <div>
             <a href="/rr" className="brand-logo left">Devship</a>
@@ -72,15 +76,19 @@ function Order() {
                     <div className='card-content'>
                       <p> name  :&nbsp;&nbsp;&nbsp;{datas.name}</p>
 
-                      <p> prize :&nbsp;&nbsp;&nbsp;{datas.prize}</p>
-
+                      <p>Product prize : Rs.&nbsp;&nbsp;&nbsp;<span className='style20'>{datas.prize}</span></p>
+                    <p>Offer Prize : Rs. {datas.offerprize}</p>
+                    <p>Quantity : {datas.quantity}</p>
+                    <p>Total Prize :{datas.totalprize} </p>
+                    <p>Shipping : <span style={{color : "green",size : "20px"}}>{datas.Approved}</span></p>
                       <p></p>
                     </div>
                     <div className='card-action center'>
                       <button className='btn' onClick={() => {
                         axios.post(`http://localhost:8000/orderdel/${datas._id}`).then((data) => {
                           console.log(data);
-                          navigate(`/dashboard/${useparams.id}`)
+                          getData()
+                          // navigate(`/dashboard/${useparams.id}`)
                         }).catch((err) => {
                           console.log(err)
                         })

@@ -8,13 +8,12 @@ import Img2 from '../Assets/shoes.jpg';
 
 function Dashboard() {
 
-    const useparams = useParams("id");
+    const useparams = useParams("id")
     console.log(useparams)
-
+    
 
     const [emailupdate, setEmailupdate] = useState(null);
     const [userData, setUserData] = useState();
-    const [searchProduct, setSearchProduct] = useState("");
 
 
     useEffect(() => {
@@ -61,8 +60,6 @@ function Dashboard() {
         e.preventDefault();
         navigate(`/mobile/${useparams.id}`)
     }
-
-
 
     const navi = () => {
         navigate(`/Todos/${useparams.id}`)
@@ -130,8 +127,7 @@ function Dashboard() {
     return (
 
         <>
-
-            <nav class="nav-wraper indigo">
+            <nav className="nav-wraper indigo">
                 <div className="container">
                     <div>
                         <a href="/rr" className="brand-logo left">Devship</a>
@@ -278,7 +274,7 @@ function Dashboard() {
                 <div class="col s4 ">
                     <div class="card">
                         <div class="card-image">
-                            <img src={Img} />
+                            <img src={Img} alt = "done"/>
                         </div>
                         <div class="card-content center">
                             <h5>New Mobiles here</h5>
@@ -292,7 +288,7 @@ function Dashboard() {
                 <div class="col s4 ">
                     <div class="card">
                         <div class="card-image">
-                            <img src={Img2} style={{ height: "340px" }} />
+                            <img src={Img2} style={{ height: "340px" }} alt = "done1" />
                         </div>
                         <div class="card-content center">
                             <h5>New Shoes here</h5>
@@ -306,7 +302,7 @@ function Dashboard() {
                 <div class="col s4 ">
                     <div class="card">
                         <div class="card-image">
-                            <img src={Img1} style={{ height: "340px" }} />
+                            <img src={Img1} style={{ height: "340px" }} alt = "done2"/>
                         </div>
                         <div class="card-content center">
                             <h5>New Shirts here</h5>
