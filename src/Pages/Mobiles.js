@@ -98,6 +98,7 @@ function Mobiles() {
               <div className='col s3'>
                 <div className='card'>
                   <div className='card-content'>
+                  {datas.availability === true ? (<div className='center' style={{color : "green" , fontSize : "20px"}}>{datas.stock1}</div>) : (<div className='center' style={{color : "red",fontSize : "20px"}}>{datas.stock2}</div>)}<hr/>
                     <img src={`http://localhost:8000/${datas.photo}`} style={{ height: "200px", width: "200px" }} alt="..." />
                     <p>Mobile name  :&nbsp;&nbsp;&nbsp;{datas.name}</p>
                     <p>Mobile prize : Rs.&nbsp;&nbsp;&nbsp;<span className='style20'>{datas.prize}</span></p>
@@ -106,20 +107,23 @@ function Mobiles() {
                   <div className='card-action center'>
                     {Values === useparams.id ? (<div>
                       <button className='btn' onClick={() => {
-                        const pp = {
-                          username: useparams.id,
-                          name: datas.name,
-                          prize: datas.prize,
-                          offerprize: datas.offerprize,
-                          photo: `http://localhost:8000/${datas.photo}`
+                        if(datas.availability === true){
+                          const pp = {
+                            username: useparams.id,
+                            name: datas.name,
+                            prize: datas.prize,
+                            offerprize: datas.offerprize,
+                            photo: `http://localhost:8000/${datas.photo}`
+                          }
+                          axios.post(`http://localhost:8000/addcart/${useparams.id}`, pp).then((data) => {
+                            console.log(data);
+                            alert('posted')
+                          }).catch((err) => {
+                            console.log(err)
+                          })
+                        } else{
+                          alert("out of stock")
                         }
-
-                        axios.post(`http://localhost:8000/addcart/${useparams.id}`, pp).then((data) => {
-                          console.log(data);
-                          alert('posted')
-                        }).catch((err) => {
-                          console.log(err)
-                        })
                       }}>AddCart</button>
                     </div>) : (<div>
                       <button className='btn center' onClick={() =>{

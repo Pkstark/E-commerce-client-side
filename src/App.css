@@ -8,6 +8,7 @@
 
 .style3 {
     margin-top: 1%;
+    transform: perspective(100px) translateX(70px);
 }
 
 .style4 {
@@ -93,4 +94,16 @@
 .style20{
     text-decoration: line-through;
     color: red;
+  }
+  .style21{
+    margin-top: 1%;
+    transform: perspective(100px) translateX(-300px);
+  }
+  .style22{
+    margin-top: 1%;
+    transform: perspective(100px) translateX(-150px);
+  }
+  .style23{
+    margin-top: 1%;
+    transform: perspective(100px) translateX(-150px);
   }

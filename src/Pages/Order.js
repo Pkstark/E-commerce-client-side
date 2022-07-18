@@ -18,6 +18,10 @@ function Order() {
     e.preventDefault();
     navigate(`/cart/${useparams.id}`);
   }
+  const pass = (e) => {
+    e.preventDefault();
+    navigate(`/ship/${useparams.id}`);
+  }
 
   useEffect(() => {
     getData()
@@ -52,6 +56,7 @@ function Order() {
             <a href="/rr" className="brand-logo left">Devship</a>
             <button className='btn indigo right style11' onClick={rr}>Dashboard</button>&nbsp;
             <button className='btn indigo right style13' onClick={tt}>Cart</button>
+            <button className='btn indigo right style23' onClick={pass}>Shipping</button>
           </div>
         </div>
       </nav>
@@ -76,12 +81,11 @@ function Order() {
                     <div className='card-content'>
                       <p> name  :&nbsp;&nbsp;&nbsp;{datas.name}</p>
 
-                      <p>Product prize : Rs.&nbsp;&nbsp;&nbsp;<span className='style20'>{datas.prize}</span></p>
-                    <p>Offer Prize : Rs. {datas.offerprize}</p>
-                    <p>Quantity : {datas.quantity}</p>
-                    <p>Total Prize :{datas.totalprize} </p>
-                    <p>Shipping : <span style={{color : "green",size : "20px"}}>{datas.Approved}</span></p>
-                      <p></p>
+                      <p>Product prize : Rs.&nbsp;&nbsp;&nbsp;<span className='style20'>{datas.prize} /-</span></p>
+                    <p>Offer Prize : Rs. {datas.offerprize}/-</p>
+                    <p>Total Prize : Rs . {datas.totalprize} /-</p><hr/>
+                    <p className='center'>Status : <span style={{color : "green",size : "20px"}}>{datas.Approved}</span></p><br/>
+                    <p>Deleivery Details &nbsp; :<a href = "" onClick = {pass} >Click here</a></p>
                     </div>
                     <div className='card-action center'>
                       <button className='btn' onClick={() => {

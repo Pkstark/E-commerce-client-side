@@ -114,6 +114,11 @@ function Dashboard() {
         navigate(`/cart/${useparams.id}`);
     }
 
+    const poste = (e) => {
+        e.preventDefault();
+        navigate(`/ship/${useparams.id}`);
+    }
+
     const posted = (e) => {
         e.preventDefault();
         navigate(`/order/${useparams.id}`);
@@ -132,6 +137,7 @@ function Dashboard() {
                     <div>
                         <a href="/rr" className="brand-logo left">Devship</a>
                         <button className='btn indigo right style14' onClick={posted}>MyOrders</button>
+                        {/* <button className='btn indigo right style21' onClick={poste}>Shipping</button> */}
                         <button className='btn indigo right style3 sidenav-trigger' onClick={activate} data-target="resposive" >Profile</button>
                         <button className='btn indigo right style15' onClick={pass2}>Cart</button>
                     </div>

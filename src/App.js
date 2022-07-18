@@ -16,6 +16,7 @@ import Order from './Pages/Order';
 import Guest from './Pages/Guest';
 import QuestCart  from './Pages/QuestCart';
 import GuestLogin from './Pages/GuestLogin';
+import Shipping from './Pages/Shipping';
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
           <Route path='/.register' element = {<Guest/>}/>
           <Route path='/.cart/:id' element = {<QuestCart/>}/>
           <Route path='/.login' element = {<GuestLogin/>}/>
+          <Route path='/ship/:id' element = {<Shipping/>}/>
         </Routes>
       </BrowserRouter>
     </>

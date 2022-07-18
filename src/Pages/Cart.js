@@ -116,6 +116,7 @@ function Cart() {
 
                       <p>Product prize : Rs.&nbsp;&nbsp;&nbsp;<span className='style20'>{datas.prize}</span></p>
                       <p>Offer Prize : Rs. {datas.offerprize}</p>
+                      <p>Discount : {datas.discount} %</p><br/>
                       <input type="number" onChange={(e) => setSelect(e.target.value)} placeholder="Quantity" id='l'/>
                     </div>
                     <div className='card-action center'>
@@ -126,7 +127,8 @@ function Cart() {
                           prize: datas.prize,
                           offerprize: datas.offerprize,
                           photo: datas.photo,
-                          quantity : Select
+                          quantity : Select,
+                          discount : datas.discount
                         }
                         axios.post(`http://localhost:8000/payment`, pp).then((data) => {
                           console.log(data);
