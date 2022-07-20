@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-// import M from 'materialize-css/dist/js/materialize.min.js';
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 
 function Cart() {
@@ -72,6 +72,15 @@ function Cart() {
   //   navigate("/login")
   // }
 
+  const geter = () => {
+    var elems = document.querySelectorAll('.modal');
+    var trigg = M.Modal.init(elems, {});
+  }
+
+  const pp = () => {
+    navigate(`/shipadd/${useparams.id}`)
+  }
+
   return (
     <div>
       <nav className="nav-wraper indigo">
@@ -88,7 +97,6 @@ function Cart() {
         <div className='style6'>
         </div>
       </ul>
-
 
       {Values === useparams.id ? (<div>
 
@@ -116,30 +124,67 @@ function Cart() {
 
                       <p>Product prize : Rs.&nbsp;&nbsp;&nbsp;<span className='style20'>{datas.prize}</span></p>
                       <p>Offer Prize : Rs. {datas.offerprize}</p>
-                      <p>Discount : {datas.discount} %</p><br/>
-                      <input type="number" onChange={(e) => setSelect(e.target.value)} placeholder="Quantity" id='l'/>
+                      <p>Discount : {datas.discount} %</p>
+                      <br />
+                      <input type="number" onChange={(e) => setSelect(e.target.value)} placeholder="Quantity" id='l' />
                     </div>
                     <div className='card-action center'>
-                      <button className='btn' onClick={() => {
+                      <button className='btn modal-trigger' data-target="change" onClick={() => {
+                        geter()
+
+                        window.localStorage.setItem("name",datas.name)
+                        window.localStorage.setItem("prize",datas.prize)
+                        window.localStorage.setItem("offerprize",datas.offerprize)
+                        window.localStorage.setItem("photo",datas.photo)
+                        window.localStorage.setItem("quantity" , Select)
+                        window.localStorage.setItem("discount",datas.discount)
                         const pp = {
                           username: useparams.id,
                           name: datas.name,
                           prize: datas.prize,
                           offerprize: datas.offerprize,
                           photo: datas.photo,
-                          quantity : Select,
-                          discount : datas.discount
+                          quantity: Select,
+                          discount: datas.discount
                         }
                         axios.post(`http://localhost:8000/payment`, pp).then((data) => {
                           console.log(data);
-                          // alert('order Successfully!!!')
-                          navigate(`/order/${useparams.id}`)
+
                         }).catch((err) => {
                           console.log(err)
                         })
                       }}>Order</button>
                     </div>
                   </div>
+                </div>
+
+
+                <div id="change" className="modal">
+                  <form encType="multipart/form-data" >
+                    <div className="modal-content">
+                      <h4 className='center'>Product Summery</h4>
+                      <div className='row'>
+                        <div className='col s6'>
+
+                          <p className='style25'>Product Name :&nbsp; {datas.name}</p>
+                          <p className='style25'>Product Prize :&nbsp; Rs.&nbsp; <span className='style20'>{datas.prize}</span></p>
+                          <p className='style25'>Offerprize :&nbsp; Rs.&nbsp;{datas.offerprize}</p>
+                          <p className='style25'>Quantity : &nbsp;{Select}&nbsp;&nbsp;Qty</p>
+                          <p className='style25'> Discount :&nbsp; {datas.discount}%</p>
+                          <p>Product Has been near by Order , you will Select your correct Address </p>
+                          <p className='style25'>Delivery : 7 days to deliver</p>
+                          <br />
+                          <p>Are You Sure want to Order</p>
+                        </div>
+                        <div className='col s6'>
+                          <img src={datas.photo} className="style24" style={{ height: "200px", width: "200px" }} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="modal-footer">
+                      <button type='submit' className='btn center' onClick={pp}>Upload</button>
+                    </div>
+                  </form>
                 </div>
               </>
               )
@@ -156,9 +201,9 @@ function Cart() {
                   <p>Product Name : {Values1}</p>
                   <p>Product Prize : Rs.<span className='style20'>{Values2}</span></p>
                   <p>Offer Prize :Rs. {Values4} </p>
-                  <input type="number" onChange={(e) => setSelect(e.target.value)} placeholder="Quantity" id='l'/>
+                  <input type="number" onChange={(e) => setSelect(e.target.value)} placeholder="Quantity" id='l' />
                   <button type='submit' className='btn center' onClick={() => {
-                    window.localStorage.setItem("quantity",Select)
+                    window.localStorage.setItem("quantity", Select)
                     alert("please login");
                     navigate("/.register")
                   }}>Order</button>
@@ -168,7 +213,6 @@ function Cart() {
           </div>
         </div>
       </div>)}
-
 
     </div>
 

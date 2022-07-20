@@ -46,6 +46,7 @@ function QuestCart() {
                                 <p>Offer Prize :Rs. {Values4}</p>
                                 <input type="number" onChange={(e) => setSelect(e.target.value)} placeholder="Quantity" id='l'/>
                                 <button className='btn center' onClick={() => {
+                                    window.localStorage.setItem("quantity",Select)
                         const pp = {
                           username: useparams.id,
                           name: Values1,
@@ -58,7 +59,7 @@ function QuestCart() {
                           console.log(data);
                           alert('order Successfully!!!')
                           window.localStorage.setItem("quantity",Select)
-                          navigate(`/dashboard/${useparams.id}`)
+                          navigate(`/shipadd/${useparams.id}`)
                         }).catch((err) => {
                           console.log(err)
                         })

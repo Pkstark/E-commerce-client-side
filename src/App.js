@@ -17,6 +17,8 @@ import Guest from './Pages/Guest';
 import QuestCart  from './Pages/QuestCart';
 import GuestLogin from './Pages/GuestLogin';
 import Shipping from './Pages/Shipping';
+import Address from './Pages/Address';
+import ShippingAddress from './Pages/ShippingAddress';
 
 
 function App() {
@@ -42,6 +44,8 @@ function App() {
           <Route path='/.cart/:id' element = {<QuestCart/>}/>
           <Route path='/.login' element = {<GuestLogin/>}/>
           <Route path='/ship/:id' element = {<Shipping/>}/>
+          <Route path='/add/:id' element={<Address/>}/>
+          <Route path='/shipadd/:id' element={<ShippingAddress/>}/>
         </Routes>
       </BrowserRouter>
     </>

@@ -124,6 +124,11 @@ function Dashboard() {
         navigate(`/order/${useparams.id}`);
     }
 
+    const pass3 = (e) => {
+        e.preventDefault();
+        navigate(`/shipadd/${useparams.id}`);
+    }
+
     const ll = () => {
         var elems = document.querySelectorAll('.modal');
         var trigg = M.Modal.init(elems, {});
@@ -140,6 +145,8 @@ function Dashboard() {
                         {/* <button className='btn indigo right style21' onClick={poste}>Shipping</button> */}
                         <button className='btn indigo right style3 sidenav-trigger' onClick={activate} data-target="resposive" >Profile</button>
                         <button className='btn indigo right style15' onClick={pass2}>Cart</button>
+                        
+                        <button className='btn indigo right style26' onClick={pass3}>Address</button>
                     </div>
                 </div>
             </nav>

@@ -65,7 +65,7 @@
 
 .style14 {
     margin-top: 1%;
-    transform: perspective(100px) translateX(-270px);
+    transform: perspective(100px) translateX(-315px);
 }
 
 .style15 {
@@ -106,4 +106,36 @@
   .style23{
     margin-top: 1%;
     transform: perspective(100px) translateX(-150px);
+  }
+  .style24{
+    transform: perspective(100px) translateY(50px);
+  }
+  .style25{
+    font-size: 20px;
+  }
+  .style26{
+    margin-top: 1%;
+    transform: perspective(100px) translateX(90px);
+  }
+  .style27{
+    margin-top: 1%;
+    transform: perspective(100px) translateX(-100px);
+  }
+  .style28{
+    transform: perspective(100px) translateX(-1200px) translateY(-590px);
+  }
+  .style29{
+    margin-top: 1%;
+    transform: perspective(100px) translate(-100px);
+  }
+  .style30{
+    transform: perspective(100px) translateX(20px);
+  }
+  .style31{
+    margin-top: -5%;
+  }
+  .style32{
+    margin-top: -10%;
+    margin-right: -5%;
+
   }
