@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 function Order() {
   const useparams = useParams("id");
@@ -23,6 +24,11 @@ function Order() {
     navigate(`/ship/${useparams.id}`);
   }
 
+  const targ = () => {
+    var elems = document.querySelectorAll('.modal');
+    var trigg = M.Modal.init(elems, {});
+  }
+
   useEffect(() => {
     getData()
   }, [])
@@ -32,7 +38,7 @@ function Order() {
     const pk = {
       username: useparams.id
     }
-    axios.post("http://localhost:8000/orderdata", pk).then((data) => {
+    axios.post("http://localhost:8000/overalldata", pk).then((data) => {
       console.log(data)
       setUserData(data.data)
     }).catch((err) => {
@@ -47,10 +53,13 @@ function Order() {
     console.log(userData)
   }
 
+  const pp = localStorage.getItem("pp")
+
   return (
     <div>
 
-      <nav className="nav-wraper indigo">
+    <div className='navbar-fixed'>
+    <nav className="nav-wraper indigo">
         <div className="container">
           <div>
             <a href="/rr" className="brand-logo left">Devship</a>
@@ -65,7 +74,7 @@ function Order() {
         <div className='style6'>
         </div>
       </ul>
-
+    </div>
       {userData !== null ? (<div>
 
         <div className='container'>
@@ -88,17 +97,33 @@ function Order() {
                     <p>Deleivery Details &nbsp; :<a href = "" onClick = {pass} >Click here</a></p>
                     </div>
                     <div className='card-action center'>
-                      <button className='btn' onClick={() => {
-                        axios.post(`http://localhost:8000/orderdel/${datas._id}`).then((data) => {
-                          console.log(data);
-                          getData()
-                          // navigate(`/dashboard/${useparams.id}`)
-                        }).catch((err) => {
-                          console.log(err)
-                        })
+                      <button className='btn modal-trigger' data-target="change2" onClick={() => {
+                        targ();
+                        getData();
                       }}>Cancel</button>
                     </div>
                   </div>
+
+                  <div id="change2" className="modal">
+                                    <form>
+                                        <div className="modal-content">
+                                            <h4 className='center'>Delete Your Address</h4>
+                                            <p className='center'>Are You Sure ? you wnat to Delete your Address...!!!</p>
+                                        </div>
+                                        <div className="modal-footer">
+                                            <button type='submit' className='btn mod modal-close indigo' onClick={() => {
+                                                axios.post(`http://localhost:8000/overdel/${datas._id}`).then((data) => {
+                                                    console.log(data);
+                                                    // navigate(`/dashboard/${useparams.id}`)
+                                                    getData();
+                                                }).catch((err) => {
+                                                    console.log(err)
+                                                })
+                                            }}>Delete</button>
+                                        </div>
+                                    </form>
+                                </div>
+
                 </div>
               </>
               )

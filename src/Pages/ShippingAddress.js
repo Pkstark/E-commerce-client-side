@@ -11,6 +11,7 @@ function ShippingAddress() {
     const navigate = useNavigate();
 
     const [userData, setuserData] = useState([])
+    const [overAll, setOverAll] = useState([])
 
     const [Flatno, setFlat] = useState("")
     const [address1, setAddress1] = useState("")
@@ -110,6 +111,7 @@ function ShippingAddress() {
 
     useEffect(() => {
         getData();
+        overallData();
     }, [])
 
     const getData = () => {
@@ -119,6 +121,20 @@ function ShippingAddress() {
         axios.post("http://localhost:8000/getaddress", pp).then((data) => {
             setuserData(data.data)
             console.log(data)
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+
+
+    const overallData = () => {
+        const pk = {
+            username: useparams.id
+        }
+        axios.post("http://localhost:8000/overalldata", pk).then((data) => {
+            console.log(data);
+            setOverAll(data.data);
+            console.log(overAll)
         }).catch((err) => {
             console.log(err)
         })
@@ -143,47 +159,49 @@ function ShippingAddress() {
         e.preventDefault();
 
         const pk = {
-            username : useparams.id,
-            name : name,
-            prize : prize,
-            photo : photo,
-            offerprize : offerprize,
-            quantity : quantity,
-            discount : discount,
-            flatno : flatno,
-            address1 : Address,
-            address2 : Address1,
-            city : City,
-            state : State,
-            pincode : Pincode,
-            mobile : Mobile
+            username: useparams.id,
+            name: name,
+            prize: prize,
+            photo: photo,
+            offerprize: offerprize,
+            quantity: quantity,
+            discount: discount,
+            flatno: flatno,
+            address1: Address,
+            address2: Address1,
+            city: City,
+            state: State,
+            pincode: Pincode,
+            mobile: Mobile
         }
 
-        axios.post ("http://localhost:8000/overall",pk).then((data) => {
+        axios.post("http://localhost:8000/overall", pk).then((data) => {
             console.log(data);
             alert("Order Successfully")
+            navigate(`/order/${useparams.id}`)
         }).catch((err) => {
             console.log(err)
         })
     }
 
-
     return (
         <div>
-            <nav className="nav-wraper indigo">
-                <div className="container">
-                    <div>
-                        <a href="/rr" className="brand-logo left">Devship</a>
-                        <button className='btn indigo right style11' onClick={rr}>Dashboard</button>
-                        <button className='btn indigo right style29' onClick={kk}>Address</button>
+            <div className='navbar-fixed'>
+                <nav className="nav-wraper indigo">
+                    <div className="container">
+                        <div>
+                            <a href="/rr" className="brand-logo left">Devship</a>
+                            <button className='btn indigo right style11' onClick={rr}>Dashboard</button>
+                            <button className='btn indigo right style29' onClick={kk}>Address</button>
+                        </div>
                     </div>
-                </div>
-            </nav>
-            <ul className="sidenav indigo" id="resposive"><br /><br />
-                <h4 className='center' style={{ color: "white" }}>DevShip</h4>
-                <div className='style6'>
-                </div>
-            </ul>
+                </nav>
+                <ul className="sidenav indigo" id="resposive"><br /><br />
+                    <h4 className='center' style={{ color: "white" }}>DevShip</h4>
+                    <div className='style6'>
+                    </div>
+                </ul>
+            </div>
 
             <div className="fixed-action-btn">
                 <a className="btn-floating btn-large green">
@@ -205,8 +223,8 @@ function ShippingAddress() {
                                             </a>
                                             <p>Client Name : {useparams.id}</p><br />
                                             <p>Address : &nbsp;{datas.flatno},&nbsp;{datas.address1},&nbsp;{datas.address2}.</p><br />
-                                            <p>City : &nbsp;{datas.city}</p><br />
                                             <p>State :&nbsp; {datas.state}</p><br />
+                                            <p>City : &nbsp;{datas.city}-{datas.pincode}</p><br />
                                             <p>Phone Number : &nbsp; {datas.mobile}</p><br />
                                             <button className='btn modal-trigger' data-target="change1" onClick={() => {
                                                 window.localStorage.setItem("id2", datas._id)
@@ -221,12 +239,11 @@ function ShippingAddress() {
                                                 window.localStorage.setItem("state", datas.state);
                                                 window.localStorage.setItem("pincode", datas.pincode);
                                                 window.localStorage.setItem("mobile", datas.mobile);
+                                                alert("address selected")
                                             }}>Select</button>
                                         </div>
                                     </div>
                                 </div>
-
-
                                 <div id="change1" className="modal">
                                     <form encType="multipart/form-data" >
                                         <div className="modal-content">
@@ -311,28 +328,40 @@ function ShippingAddress() {
                                         </div>
                                         <div className="modal-footer">
                                             <button type='submit' className='btn mod modal-close indigo' onClick={() => {
-                                                    axios.post(`http://localhost:8000/addressdel/${datas._id}`).then((data) => {
-                                                        console.log(data);
-                                                        // navigate(`/dashboard/${useparams.id}`)
-                                                        getData();
-                                                    }).catch((err) => {
-                                                        console.log(err)
-                                                    })
-                                                }}>Delete</button>
+                                                axios.post(`http://localhost:8000/addressdel/${datas._id}`).then((data) => {
+                                                    console.log(data);
+                                                    // navigate(`/dashboard/${useparams.id}`)
+                                                    getData();
+                                                }).catch((err) => {
+                                                    console.log(err)
+                                                })
+                                            }}>Delete</button>
                                         </div>
                                     </form>
                                 </div>
-
-
-
+                                
                             </div>)
                         })}
                     </div>) : (<div>{ }</div>)}
                 </div><button className='btn right style31' onClick={DataPosted} >Order</button><hr />
                 <div className='row'>
-                    <div className='col s4'>
-
-                    </div>
+                    <h5 className='center'>Billing Address</h5>
+                    
+                            <div className='col s3'>
+                                <div className='card'>
+                                    
+                                    <div className='card-content'>
+                                    <a className="btn-floating style32 greenyellow right">
+                                        <i className="large material-icons">check_circle</i>
+                                    </a>
+                                        <p>Name : &nbsp;{useparams.id}</p>
+                                        <p>Address : &nbsp;{flatno}{Address},{Address1}</p>
+                                        <p>City : &nbsp;{City}</p>
+                                        <p>State : &nbsp;{State}</p>
+                                        <p>Pincode :&nbsp;{Pincode}</p>
+                                    </div>
+                                </div>
+                            </div>
                 </div>
 
             </div>
@@ -389,7 +418,7 @@ function ShippingAddress() {
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button type='submit' className='btn center' disabled={disable} onClick={(e) => setcount(count + 1)}>Update</button>
+                        <button type='submit' className='btn center' disabled={disable} onClick={(e) => setcount(count + 1)}>Add</button>
                     </div>
                 </form>
             </div>

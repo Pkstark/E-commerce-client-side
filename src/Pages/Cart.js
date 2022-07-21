@@ -11,6 +11,7 @@ function Cart() {
 
   const [Select, setSelect] = useState()
 
+  const [orderdata, setorderdata] = useState([])
 
   const useparams = useParams("id");
 
@@ -23,7 +24,7 @@ function Cart() {
 
 
   useEffect(() => {
-    getData()
+    getData();
     let cartlist = localStorage.getItem("cartList");
     if (cartlist) {
       setUData(JSON.parse(cartlist));
@@ -32,6 +33,8 @@ function Cart() {
   }, [])
 
   let getData = () => {
+
+    console.log(orderdata)
     console.log(useparams)
     const pk = {
       username: useparams.id
@@ -44,6 +47,17 @@ function Cart() {
       alert("something went to wrong")
     })
   }
+
+  // const orderData = () => {
+  //   axios.get(`http://localhost:8000/orderdatas/${ids}`).then((datas) => {
+  //     console.log(datas)
+  //     setorderdata(datas.data)
+  //   }).catch((err) => {
+  //     console.log(err)
+  //   })
+  // }
+
+  
 
   if (userData === null) {
     console.log("data not found");
@@ -60,9 +74,11 @@ function Cart() {
   const Values2 = localStorage.getItem("prize");
   const Values3 = localStorage.getItem("photo");
   const Values4 = localStorage.getItem("offerprize");
+  const Values5 = localStorage.getItem("quantity");
+  const Values6 = localStorage.getItem("discount");
 
+  const ids = localStorage.getItem("ids");
 
-  console.log(Select)
   // const Value = localStorage.getItem("list")
 
 
@@ -130,34 +146,18 @@ function Cart() {
                     </div>
                     <div className='card-action center'>
                       <button className='btn modal-trigger' data-target="change" onClick={() => {
-                        geter()
-
                         window.localStorage.setItem("name",datas.name)
                         window.localStorage.setItem("prize",datas.prize)
                         window.localStorage.setItem("offerprize",datas.offerprize)
                         window.localStorage.setItem("photo",datas.photo)
                         window.localStorage.setItem("quantity" , Select)
                         window.localStorage.setItem("discount",datas.discount)
-                        const pp = {
-                          username: useparams.id,
-                          name: datas.name,
-                          prize: datas.prize,
-                          offerprize: datas.offerprize,
-                          photo: datas.photo,
-                          quantity: Select,
-                          discount: datas.discount
-                        }
-                        axios.post(`http://localhost:8000/payment`, pp).then((data) => {
-                          console.log(data);
-
-                        }).catch((err) => {
-                          console.log(err)
-                        })
+                        window.localStorage.setItem("ids",datas._id);
+                        geter();
                       }}>Order</button>
                     </div>
                   </div>
                 </div>
-
 
                 <div id="change" className="modal">
                   <form encType="multipart/form-data" >
@@ -165,19 +165,16 @@ function Cart() {
                       <h4 className='center'>Product Summery</h4>
                       <div className='row'>
                         <div className='col s6'>
-
-                          <p className='style25'>Product Name :&nbsp; {datas.name}</p>
-                          <p className='style25'>Product Prize :&nbsp; Rs.&nbsp; <span className='style20'>{datas.prize}</span></p>
-                          <p className='style25'>Offerprize :&nbsp; Rs.&nbsp;{datas.offerprize}</p>
+                          <p className='style25'>Product Name :{Values1}</p>
+                          <p className='style25'>Product Prize :&nbsp; Rs.&nbsp; <span className='style20'>{Values2}</span></p>
+                          <p className='style25'>Offerprize :&nbsp; Rs.&nbsp;{Values4}</p>
                           <p className='style25'>Quantity : &nbsp;{Select}&nbsp;&nbsp;Qty</p>
-                          <p className='style25'> Discount :&nbsp; {datas.discount}%</p>
+                          <p className='style25'> Discount :&nbsp; {Values6}%</p>
+                          <p className='style25'>Delivery : 7 days to deliver</p><br/>
                           <p>Product Has been near by Order , you will Select your correct Address </p>
-                          <p className='style25'>Delivery : 7 days to deliver</p>
-                          <br />
-                          <p>Are You Sure want to Order</p>
                         </div>
                         <div className='col s6'>
-                          <img src={datas.photo} className="style24" style={{ height: "200px", width: "200px" }} />
+                          <img src={Values3} className="style24" style={{ height: "200px", width: "200px" }} />
                         </div>
                       </div>
                     </div>

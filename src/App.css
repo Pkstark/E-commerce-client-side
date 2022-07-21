@@ -130,7 +130,22 @@
   }
   .style30{
     transform: perspective(100px) translateX(20px);
+    color: black;
   }
+
+  .style30{
+    background-color:yellow;
+  }
+  
+  .style30:hover{
+    background-color:orange;
+  }
+  
+  .style30:focus{
+    margin-top: 1px solid yellow;
+    margin-bottom: 1px solid yellow;
+  }
+
   .style31{
     margin-top: -5%;
   }
