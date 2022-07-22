@@ -94,7 +94,7 @@ function Shipping() {
                       <p>TotalPrize : &nbsp;&nbsp;&nbsp;Rs.&nbsp;{datas.totalprize}/-</p>
                       <p>Discount :&nbsp;&nbsp; {datas.discount}&nbsp;%</p>
                       <p>Delivery :&nbsp;&nbsp; {datas.shipping} &nbsp;days to deliver</p>
-                      <p>Shippin Address : &nbsp;{datas.flatno},{datas.address1},{datas.address2},{datas.State},{datas.City}-{datas.pincode}.</p>
+                      <p>Shippin Address : &nbsp;{datas.flatno},{datas.address1},{datas.address2},{datas.state},{datas.city}-{datas.pincode}.</p>
                       <p>Contact No :&nbsp;&nbsp;&nbsp; {datas.mobile}</p><hr/>
                       <div className='center'>
                       <p>Order :&nbsp;&nbsp;&nbsp;<span style={{ color: "green" }}>{datas.Approved}</span></p>

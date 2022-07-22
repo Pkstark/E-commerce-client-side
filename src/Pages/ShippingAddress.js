@@ -23,6 +23,15 @@ function ShippingAddress() {
 
     const [selection, setselection] = useState(false)
 
+    const [data1, setdata1] = useState('')
+    const [data2, setdata2] = useState('')
+    const [data3, setdata3] = useState('')
+    const [data4, setdata4] = useState('')
+    const [data5, setdata5] = useState('')
+    const [data6, setdata6] = useState('')
+    const [data7, setdata7] = useState('')
+
+
     const [Flatno, setFlat] = useState("")
     const [address1, setAddress1] = useState("")
     const [address2, setAddress2] = useState("")
@@ -156,15 +165,16 @@ function ShippingAddress() {
     const offerprize = localStorage.getItem("offerprize");
     const quantity = localStorage.getItem("quantity");
     const discount = localStorage.getItem("discount");
-    const flatno = localStorage.getItem("faltno");
-    const Address = localStorage.getItem("address1");
-    const Address1 = localStorage.getItem("address2");
-    const City = localStorage.getItem("city");
-    const State = localStorage.getItem("state");
-    const Pincode = localStorage.getItem("pincode");
-    const Mobile = localStorage.getItem("mobile");
-    const ll = localStorage.getItem("ll")
-    const lt = localStorage.getItem("lt")
+    
+    // const flatno = localStorage.getItem("faltno");
+    // const Address = localStorage.getItem("address1");
+    // const Address1 = localStorage.getItem("address2");
+    // const City = localStorage.getItem("city");
+    // const State = localStorage.getItem("state");
+    // const Pincode = localStorage.getItem("pincode");
+    // const Mobile = localStorage.getItem("mobile");
+    // const ll = localStorage.getItem("ll")
+    // const lt = localStorage.getItem("lt")
 
 
     // const p=localStorage.getItem("p")
@@ -186,13 +196,13 @@ function ShippingAddress() {
             offerprize: offerprize,
             quantity: quantity,
             discount: discount,
-            flatno: flatno,
-            address1: Address,
-            address2: Address1,
-            city: City,
-            state: State,
-            pincode: Pincode,
-            mobile: Mobile
+            flatno: data1,
+            address1: data2,
+            address2: data3,
+            city: data4,
+            state: data5,
+            pincode: data6,
+            mobile: data7
         }
 
         axios.post("http://localhost:8000/overall", pk).then((data) => {
@@ -240,7 +250,13 @@ function ShippingAddress() {
                                         <div className='card-content'>
                                             <a className="btn-floating style32 red right">
                                                 <i className="large material-icons modal-trigger" data-target="change2" onClick={() => {
-                                                    gest();
+                                                    axios.post(`http://localhost:8000/addressdel/${datas._id}`).then((data) => {
+                                                        console.log(data);
+                                                        // navigate(`/dashboard/${useparams.id}`)
+                                                        getData();
+                                                    }).catch((err) => {
+                                                        console.log(err)
+                                                    })
                                                 }}>cancel</i>
                                             </a>
                                             <p>Client Name : {useparams.id}</p><br />
@@ -262,13 +278,21 @@ function ShippingAddress() {
                                             }}>Update</button>
                                             <button className='btn style30' onClick={() => {
                                                 setselection(datas._id)
-                                                window.localStorage.setItem("faltno", datas.flatno);
-                                                window.localStorage.setItem("address1", datas.address1);
-                                                window.localStorage.setItem("address2", datas.address2);
-                                                window.localStorage.setItem("city", datas.city);
-                                                window.localStorage.setItem("state", datas.state);
-                                                window.localStorage.setItem("pincode", datas.pincode);
-                                                window.localStorage.setItem("mobile", datas.mobile);
+                                                // window.localStorage.setItem("faltno", datas.flatno);
+                                                // window.localStorage.setItem("address1", datas.address1);
+                                                // window.localStorage.setItem("address2", datas.address2);
+                                                // window.localStorage.setItem("city", datas.city);
+                                                // window.localStorage.setItem("state", datas.state);
+                                                // window.localStorage.setItem("pincode", datas.pincode);
+                                                // window.localStorage.setItem("mobile", datas.mobile);
+
+                                                setdata1(datas.flatno)
+                                                setdata2(datas.address1)
+                                                setdata3(datas.address2)
+                                                setdata4(datas.city)
+                                                setdata5(datas.state)
+                                                setdata6(datas.pincode)
+                                                setdata7(datas.mobile)
                                                 
                                                 // window.localStorage.setItem("pp",datas._id);
                                             }}>Select</button>
@@ -366,13 +390,7 @@ function ShippingAddress() {
                                         </p> */}
                                         <div className="modal-footer">
                                             <button type='submit' className='btn mod modal-close indigo' onClick={() => {
-                                                axios.post(`http://localhost:8000/addressdel/${datas._id}`).then((data) => {
-                                                    console.log(data);
-                                                    // navigate(`/dashboard/${useparams.id}`)
-                                                    getData();
-                                                }).catch((err) => {
-                                                    console.log(err)
-                                                })
+                                                
                                             }}>Delete</button>
                                         </div>
                                     </form>
@@ -393,10 +411,10 @@ function ShippingAddress() {
                                     <i className="large material-icons">check_circle</i>
                                 </a>
                                 <p>Name : &nbsp;{useparams.id}</p>
-                                <p>Address : &nbsp;{flatno}{Address},{Address1}</p>
-                                <p>City : &nbsp;{City}</p>
-                                <p>State : &nbsp;{State}</p>
-                                <p>Pincode :&nbsp;{Pincode}</p>
+                                <p>Address : &nbsp;{data1}{data2},{data3}</p>
+                                <p>City : &nbsp;{data4}</p>
+                                <p>State : &nbsp;{data5}</p>
+                                <p>Pincode :&nbsp;{data6}</p>
                             </div>
                         </div>
                     </div>

@@ -13,6 +13,12 @@ function Cart() {
 
   const [orderdata, setorderdata] = useState([])
 
+  const [data, setdata] = useState('')
+  const [data1, setdata1] = useState('')
+  const [data2, setdata2] = useState('')
+  const [data3, setdata3] = useState('')
+  const [data4, setdata4] = useState('')
+
   const useparams = useParams("id");
 
   const navigate = useNavigate();
@@ -153,6 +159,12 @@ function Cart() {
                         window.localStorage.setItem("quantity" , Select)
                         window.localStorage.setItem("discount",datas.discount)
                         window.localStorage.setItem("ids",datas._id);
+
+                        setdata(datas.name)
+                        setdata1(datas.prize)
+                        setdata2(datas.offerprize)
+                        setdata3(datas.discount)
+                        setdata4(datas.photo)
                         geter();
                       }}>Order</button>
                     </div>
@@ -165,16 +177,16 @@ function Cart() {
                       <h4 className='center'>Product Summery</h4>
                       <div className='row'>
                         <div className='col s6'>
-                          <p className='style25'>Product Name :{Values1}</p>
-                          <p className='style25'>Product Prize :&nbsp; Rs.&nbsp; <span className='style20'>{Values2}</span></p>
-                          <p className='style25'>Offerprize :&nbsp; Rs.&nbsp;{Values4}</p>
+                          <p className='style25'>Product Name :{data}</p>
+                          <p className='style25'>Product Prize :&nbsp; Rs.&nbsp; <span className='style20'>{data1}</span></p>
+                          <p className='style25'>Offerprize :&nbsp; Rs.&nbsp;{data2}</p>
                           <p className='style25'>Quantity : &nbsp;{Select}&nbsp;&nbsp;Qty</p>
-                          <p className='style25'> Discount :&nbsp; {Values6}%</p>
+                          <p className='style25'> Discount :&nbsp; {data3}%</p>
                           <p className='style25'>Delivery : 7 days to deliver</p><br/>
                           <p>Product Has been near by Order , you will Select your correct Address </p>
                         </div>
                         <div className='col s6'>
-                          <img src={Values3} className="style24" style={{ height: "200px", width: "200px" }} />
+                          <img src={data4} className="style24" style={{ height: "200px", width: "200px" }} />
                         </div>
                       </div>
                     </div>
