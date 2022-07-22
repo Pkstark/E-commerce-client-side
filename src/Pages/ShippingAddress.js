@@ -12,6 +12,16 @@ function ShippingAddress() {
 
     const [userData, setuserData] = useState([])
     const [overAll, setOverAll] = useState([])
+    const [update, setupdate] = useState("");
+    const [update1, setupdate1] = useState("");
+    const [update2, setupdate2] = useState("");
+    const [update3, setupdate3] = useState("");
+    const [update4, setupdate4] = useState("");
+    const [update5, setupdate5] = useState("");
+    const [update6, setupdate6] = useState("");
+    const [update7, setupdate7] = useState("");
+
+    const [selection, setselection] = useState(false)
 
     const [Flatno, setFlat] = useState("")
     const [address1, setAddress1] = useState("")
@@ -126,7 +136,6 @@ function ShippingAddress() {
         })
     }
 
-
     const overallData = () => {
         const pk = {
             username: useparams.id
@@ -154,6 +163,17 @@ function ShippingAddress() {
     const State = localStorage.getItem("state");
     const Pincode = localStorage.getItem("pincode");
     const Mobile = localStorage.getItem("mobile");
+    const ll = localStorage.getItem("ll")
+    const lt = localStorage.getItem("lt")
+
+
+    // const p=localStorage.getItem("p")
+    // const pr=localStorage.getItem("pr")
+    // const pra=localStorage.getItem("pra")
+    // const prav=localStorage.getItem("prav")
+    // const prave=localStorage.getItem("prave")
+    // const pravee=localStorage.getItem("pravee")
+    // const praveen=localStorage.getItem("praveen")
 
     const DataPosted = (e) => {
         e.preventDefault();
@@ -215,11 +235,13 @@ function ShippingAddress() {
                     {userData.length <= 3 ? (<div>
                         {userData.map((datas) => {
                             return (<div>
-                                <div className='col s3'>
-                                    <div className='card'>
+                                <div className='col s3'> 
+                                    <div className='card'>{selection === datas._id ? (<><p className='center style34' style={{color : "green"}}>Select</p></>):(<></>)}
                                         <div className='card-content'>
                                             <a className="btn-floating style32 red right">
-                                                <i className="large material-icons modal-trigger" data-target="change2" onClick={trigg}>cancel</i>
+                                                <i className="large material-icons modal-trigger" data-target="change2" onClick={() => {
+                                                    gest();
+                                                }}>cancel</i>
                                             </a>
                                             <p>Client Name : {useparams.id}</p><br />
                                             <p>Address : &nbsp;{datas.flatno},&nbsp;{datas.address1},&nbsp;{datas.address2}.</p><br />
@@ -229,9 +251,17 @@ function ShippingAddress() {
                                             <button className='btn modal-trigger' data-target="change1" onClick={() => {
                                                 window.localStorage.setItem("id2", datas._id)
                                                 console.log(ids)
-                                                gest()
+                                                gest()     
+                                                setupdate({p:datas.flatno})
+                                                setupdate1({pr:datas.address1})
+                                                setupdate2({pra:datas.address2})
+                                                setupdate3({prav:datas.city})
+                                                setupdate4({prave:datas.state})
+                                                setupdate5({kumar : datas.pincode})
+                                                setupdate6({praveen : datas.mobile})
                                             }}>Update</button>
                                             <button className='btn style30' onClick={() => {
+                                                setselection(datas._id)
                                                 window.localStorage.setItem("faltno", datas.flatno);
                                                 window.localStorage.setItem("address1", datas.address1);
                                                 window.localStorage.setItem("address2", datas.address2);
@@ -239,11 +269,13 @@ function ShippingAddress() {
                                                 window.localStorage.setItem("state", datas.state);
                                                 window.localStorage.setItem("pincode", datas.pincode);
                                                 window.localStorage.setItem("mobile", datas.mobile);
-                                                alert("address selected")
+                                                
+                                                // window.localStorage.setItem("pp",datas._id);
                                             }}>Select</button>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div id="change1" className="modal">
                                     <form encType="multipart/form-data" >
                                         <div className="modal-content">
@@ -252,43 +284,43 @@ function ShippingAddress() {
                                                 <div className='col s12'>
                                                     <div className='row'>
                                                         <div className="input-field col s6">
-                                                            <input type="text" className="validate" id='f' onChange={(e) => setFlat(e.target.value)} name="flatno" required />
-                                                            <label for="Adminpassword">Flat No</label>
+                                                            <input type="text" className="validate" id='f' value={update.p}  onChange={(e) => setFlat(e.target.value)} name="flatno" required />
+                                                            
                                                         </div>
 
                                                         <div className="input-field col s6">
-                                                            <input type="text" className="validate" id='g' onChange={(e) => setAddress1(e.target.value)} name="address1" required />
-                                                            <label>Address 1</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className='row'>
-                                                        <div className="input-field col s6">
-                                                            <input type="text" className="validate" id='a' onChange={(e) => setAddress2(e.target.value)} name="address2" required />
-                                                            <label>Address 2</label>
-                                                        </div>
-
-                                                        <div className="input-field col s6">
-                                                            <input type="text" className="validate" id='b' onChange={(e) => setCity(e.target.value)} name="city" required />
-                                                            <label>City</label>
+                                                            <input type="text" className="validate" id='g' value={update1.pr} onChange={(e) => setAddress1(e.target.value)} name="address1" required />
+                                                            
                                                         </div>
                                                     </div>
 
                                                     <div className='row'>
                                                         <div className="input-field col s6">
-                                                            <input type="text" className="validate" id='c' onChange={(e) => setState(e.target.value)} name="state" required />
-                                                            <label>State</label>
+                                                            <input type="text" className="validate" id='a' value={update2.pra} onChange={(e) => setAddress2(e.target.value)} name="address2" required />
+                                                        
                                                         </div>
 
                                                         <div className="input-field col s6">
-                                                            <input type="text" className="validate" id='d' onChange={(e) => setPincode(e.target.value)} name="pincode" required />
-                                                            <label>Pincode</label>
+                                                            <input type="text" className="validate" id='b' value={update3.prav} onChange={(e) => setCity(e.target.value)} name="city" required />
+                                                            
+                                                        </div>
+                                                    </div>
+
+                                                    <div className='row'>
+                                                        <div className="input-field col s6">
+                                                            <input type="text" className="validate" id='c' value={update4.prave} onChange={(e) => setState(e.target.value)} name="state" required />
+                                                            
+                                                        </div>
+
+                                                        <div className="input-field col s6">
+                                                            <input type="text" className="validate" id='d' value={update5.kumar} onChange={(e) => setPincode(e.target.value)} name="pincode" required />
+                                                            
                                                         </div>
                                                     </div>
 
                                                     <div className="input-field col s12">
-                                                        <input type="text" className="validate" id='e' onChange={(e) => setMobile(e.target.value)} name="mobile" required />
-                                                        <label>Mobile number</label>
+                                                        <input type="text" className="validate" id='e' value={update6.praveen} onChange={(e) => setMobile(e.target.value)} name="mobile" required />
+                                                        
                                                     </div>
                                                 </div>
                                                 <div className='col s6'>
@@ -306,7 +338,6 @@ function ShippingAddress() {
                                                     pincode: pincode,
                                                     mobile: mobile
                                                 }
-
                                                 axios.put(`http://localhost:8000/addessup/${ids}`, kk).then((data) => {
                                                     console.log(data);
                                                     alert("success");
@@ -319,13 +350,20 @@ function ShippingAddress() {
                                     </form>
                                 </div>
 
-
                                 <div id="change2" className="modal">
                                     <form>
                                         <div className="modal-content">
                                             <h4 className='center'>Delete Your Address</h4>
                                             <p className='center'>Are You Sure ? you wnat to Delete your Address...!!!</p>
                                         </div>
+                                        {/* <p className='style33'>
+                                            <label>
+                                                <input type="checkbox" onClick={() => {
+                                                    window.localStorage.setItem("pp",datas._id);
+                                                }} required/>
+                                                <span>Confrim the Delete</span>
+                                            </label>
+                                        </p> */}
                                         <div className="modal-footer">
                                             <button type='submit' className='btn mod modal-close indigo' onClick={() => {
                                                 axios.post(`http://localhost:8000/addressdel/${datas._id}`).then((data) => {
@@ -339,29 +377,29 @@ function ShippingAddress() {
                                         </div>
                                     </form>
                                 </div>
-                                
+
                             </div>)
                         })}
                     </div>) : (<div>{ }</div>)}
                 </div><button className='btn right style31' onClick={DataPosted} >Order</button><hr />
                 <div className='row'>
                     <h5 className='center'>Billing Address</h5>
-                    
-                            <div className='col s3'>
-                                <div className='card'>
-                                    
-                                    <div className='card-content'>
-                                    <a className="btn-floating style32 greenyellow right">
-                                        <i className="large material-icons">check_circle</i>
-                                    </a>
-                                        <p>Name : &nbsp;{useparams.id}</p>
-                                        <p>Address : &nbsp;{flatno}{Address},{Address1}</p>
-                                        <p>City : &nbsp;{City}</p>
-                                        <p>State : &nbsp;{State}</p>
-                                        <p>Pincode :&nbsp;{Pincode}</p>
-                                    </div>
-                                </div>
+
+                    <div className='col s3'>
+                        <div className='card'>
+
+                            <div className='card-content'>
+                                <a className="btn-floating style32 greenyellow right">
+                                    <i className="large material-icons">check_circle</i>
+                                </a>
+                                <p>Name : &nbsp;{useparams.id}</p>
+                                <p>Address : &nbsp;{flatno}{Address},{Address1}</p>
+                                <p>City : &nbsp;{City}</p>
+                                <p>State : &nbsp;{State}</p>
+                                <p>Pincode :&nbsp;{Pincode}</p>
                             </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>

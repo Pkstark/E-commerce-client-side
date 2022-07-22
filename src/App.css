@@ -154,3 +154,12 @@
     margin-right: -5%;
 
   }
+  .style33{
+    transform: perspective(100px) translateX(100px);
+  }
+  .style34{
+    font-size: 15px;
+    background-color: yellowgreen;
+    color: black;
+    border-radius: 5px;
+  }
