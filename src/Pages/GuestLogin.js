@@ -77,7 +77,7 @@ function Login() {
                   <button className='btn' type='submit'>Login</button>
                 </div>
               </form>
-              <p className='center'>You Don't have a Account Please ! <a href='/guest' style={{ color: "blue" }}>Register here</a> </p><br />
+              <p className='center'>You Don't have a Account Please ! <a href='/.register' style={{ color: "blue" }}>Register here</a> </p><br />
             </div>
           </div>
         </div>

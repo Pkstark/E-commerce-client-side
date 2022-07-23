@@ -13,13 +13,6 @@ function ShippingAddress() {
     const [userData, setuserData] = useState([])
     const [overAll, setOverAll] = useState([])
     const [update, setupdate] = useState("");
-    const [update1, setupdate1] = useState("");
-    const [update2, setupdate2] = useState("");
-    const [update3, setupdate3] = useState("");
-    const [update4, setupdate4] = useState("");
-    const [update5, setupdate5] = useState("");
-    const [update6, setupdate6] = useState("");
-    const [update7, setupdate7] = useState("");
 
     const [selection, setselection] = useState(false)
 
@@ -166,24 +159,6 @@ function ShippingAddress() {
     const quantity = localStorage.getItem("quantity");
     const discount = localStorage.getItem("discount");
     
-    // const flatno = localStorage.getItem("faltno");
-    // const Address = localStorage.getItem("address1");
-    // const Address1 = localStorage.getItem("address2");
-    // const City = localStorage.getItem("city");
-    // const State = localStorage.getItem("state");
-    // const Pincode = localStorage.getItem("pincode");
-    // const Mobile = localStorage.getItem("mobile");
-    // const ll = localStorage.getItem("ll")
-    // const lt = localStorage.getItem("lt")
-
-
-    // const p=localStorage.getItem("p")
-    // const pr=localStorage.getItem("pr")
-    // const pra=localStorage.getItem("pra")
-    // const prav=localStorage.getItem("prav")
-    // const prave=localStorage.getItem("prave")
-    // const pravee=localStorage.getItem("pravee")
-    // const praveen=localStorage.getItem("praveen")
 
     const DataPosted = (e) => {
         e.preventDefault();
@@ -213,6 +188,17 @@ function ShippingAddress() {
             console.log(err)
         })
     }
+
+    const handleChange = (e) => {
+        const id = e.target.id;
+        const value = e.target.value;
+
+        setupdate((prevState) => ({
+            ...prevState,
+      [id]: value,
+        }))
+    }
+
 
     return (
         <div>
@@ -268,24 +254,19 @@ function ShippingAddress() {
                                                 window.localStorage.setItem("id2", datas._id)
                                                 console.log(ids)
                                                 gest()     
-                                                setupdate({p:datas.flatno})
-                                                setupdate1({pr:datas.address1})
-                                                setupdate2({pra:datas.address2})
-                                                setupdate3({prav:datas.city})
-                                                setupdate4({prave:datas.state})
-                                                setupdate5({kumar : datas.pincode})
-                                                setupdate6({praveen : datas.mobile})
+
+                                                setupdate({
+                                                    flatno : datas.flatno,
+                                                    address1 : datas.address1,
+                                                    address2 : datas.address2,
+                                                    city : datas.city,
+                                                    state:datas.state,
+                                                    pincode:datas.pincode,
+                                                    mobile : datas.mobile
+                                                })
                                             }}>Update</button>
                                             <button className='btn style30' onClick={() => {
                                                 setselection(datas._id)
-                                                // window.localStorage.setItem("faltno", datas.flatno);
-                                                // window.localStorage.setItem("address1", datas.address1);
-                                                // window.localStorage.setItem("address2", datas.address2);
-                                                // window.localStorage.setItem("city", datas.city);
-                                                // window.localStorage.setItem("state", datas.state);
-                                                // window.localStorage.setItem("pincode", datas.pincode);
-                                                // window.localStorage.setItem("mobile", datas.mobile);
-
                                                 setdata1(datas.flatno)
                                                 setdata2(datas.address1)
                                                 setdata3(datas.address2)
@@ -308,42 +289,38 @@ function ShippingAddress() {
                                                 <div className='col s12'>
                                                     <div className='row'>
                                                         <div className="input-field col s6">
-                                                            <input type="text" className="validate" id='f' value={update.p}  onChange={(e) => setFlat(e.target.value)} name="flatno" required />
-                                                            
+                                                            <input type="text" className="validate" id='flatno' value={update.flatno} onChange={handleChange} name="flatno" required />
                                                         </div>
-
                                                         <div className="input-field col s6">
-                                                            <input type="text" className="validate" id='g' value={update1.pr} onChange={(e) => setAddress1(e.target.value)} name="address1" required />
-                                                            
+                                                            <input type="text" className="validate" id='address1' value={update.address1} onChange={handleChange} name="address1" required />
                                                         </div>
                                                     </div>
 
                                                     <div className='row'>
                                                         <div className="input-field col s6">
-                                                            <input type="text" className="validate" id='a' value={update2.pra} onChange={(e) => setAddress2(e.target.value)} name="address2" required />
+                                                            <input type="text" className="validate" id='address2' value={update.address2} onChange={handleChange}  name="address2" required />
                                                         
                                                         </div>
 
                                                         <div className="input-field col s6">
-                                                            <input type="text" className="validate" id='b' value={update3.prav} onChange={(e) => setCity(e.target.value)} name="city" required />
+                                                            <input type="text" className="validate" id='city' value={update.city} onChange={handleChange}  name="city" required />
                                                             
                                                         </div>
                                                     </div>
 
                                                     <div className='row'>
                                                         <div className="input-field col s6">
-                                                            <input type="text" className="validate" id='c' value={update4.prave} onChange={(e) => setState(e.target.value)} name="state" required />
-                                                            
+                                                            <input type="text" className="validate" id='state' value={update.state} onChange={handleChange} name="state" required />
                                                         </div>
 
                                                         <div className="input-field col s6">
-                                                            <input type="text" className="validate" id='d' value={update5.kumar} onChange={(e) => setPincode(e.target.value)} name="pincode" required />
+                                                            <input type="text" className="validate" id='pincode' value={update.pincode} onChange={handleChange} name="pincode" required />
                                                             
                                                         </div>
                                                     </div>
 
                                                     <div className="input-field col s12">
-                                                        <input type="text" className="validate" id='e' value={update6.praveen} onChange={(e) => setMobile(e.target.value)} name="mobile" required />
+                                                        <input type="text" className="validate" id='mobile' value={update.mobile} onChange={handleChange}  name="mobile" required />
                                                         
                                                     </div>
                                                 </div>
@@ -353,16 +330,8 @@ function ShippingAddress() {
                                         </div>
                                         <div className="modal-footer">
                                             <button type='submit' className='btn center' onClick={() => {
-                                                const kk = {
-                                                    flatno: Flatno,
-                                                    address1: address1,
-                                                    address2: address2,
-                                                    city: city,
-                                                    state: state,
-                                                    pincode: pincode,
-                                                    mobile: mobile
-                                                }
-                                                axios.put(`http://localhost:8000/addessup/${ids}`, kk).then((data) => {
+                                                
+                                                axios.put(`http://localhost:8000/addessup/${ids}`, update).then((data) => {
                                                     console.log(data);
                                                     alert("success");
                                                     getData()
