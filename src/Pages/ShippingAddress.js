@@ -43,6 +43,10 @@ function ShippingAddress() {
         navigate(`/add/${useparams.id}`);
     }
 
+    const pp = () => {
+        navigate(`/form/${useparams.id}`);
+    }
+
 
     const trigg = () => {
         var elems = document.querySelectorAll('.modal');
@@ -209,6 +213,7 @@ function ShippingAddress() {
                             <a href="/rr" className="brand-logo left">Devship</a>
                             <button className='btn indigo right style11' onClick={rr}>Dashboard</button>
                             <button className='btn indigo right style29' onClick={kk}>Address</button>
+                            <button className='btn indigo right style35' onClick={pp}>Form</button>
                         </div>
                     </div>
                 </nav>

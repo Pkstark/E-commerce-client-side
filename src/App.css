@@ -163,3 +163,15 @@
     color: black;
     border-radius: 5px;
   }
+
+.style35{
+  margin-top: 1%;
+  transform: perspective(100px) translate(-130px);
+}
+.style36{
+  margin-top: 4%;
+}
+.style37{
+  margin-top: 1%;
+  border-radius: 5px;
+}

@@ -19,6 +19,7 @@ import GuestLogin from './Pages/GuestLogin';
 import Shipping from './Pages/Shipping';
 import Address from './Pages/Address';
 import ShippingAddress from './Pages/ShippingAddress';
+import Form from './Pages/Form';
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
           <Route path='/ship/:id' element = {<Shipping/>}/>
           <Route path='/add/:id' element={<Address/>}/>
           <Route path='/shipadd/:id' element={<ShippingAddress/>}/>
+          <Route path='/form/:id' element={<Form/>}/>
         </Routes>
       </BrowserRouter>
     </>
