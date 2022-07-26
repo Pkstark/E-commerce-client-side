@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import axios from 'axios';
+import { isWebUri } from 'valid-url';
 
 function Form() {
 
@@ -11,6 +12,18 @@ function Form() {
     const [url, seturl] = useState('');
     const [photo, setphoto] = useState('');
     const [select, setselect] = useState('');
+
+    const [isError, setIsError] = useState('')
+    const [isError1, setIsError1] = useState('')
+    const [isError2, setIsError2] = useState('')
+    const [isError3, setIsError3] = useState('')
+
+    const [DataId, setDataId] = useState('');
+
+    const [Id, setId] = useState('');
+    const [Update, setUpdate] = useState("");
+    const [photo1, setphoto1] = useState('')
+
 
     const [userData, setuserData] = useState([]);
 
@@ -27,9 +40,9 @@ function Form() {
         navigate(`/shipadd/${useparams.id}`);
     }
 
-    const drop = () => {
-        let drop = document.querySelectorAll('.dropdown-trigger');
-        M.Dropdown.init(drop)
+    const trigger = () => {
+        var elems = document.querySelectorAll('.modal');
+        var trig = M.Modal.init(elems, {});
     }
 
     const addForm = () => {
@@ -46,27 +59,29 @@ function Form() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const formData = new FormData();
+        if (Validation()) {
 
-        formData.append("username", useparams.id);
-        formData.append("name", username)
-        formData.append("url", url);
-        formData.append("image", photo);
-        formData.append("select", select)
+            const formData = new FormData();
 
-        axios.post("http://localhost:8000/addform", formData).then((data) => {
-            console.log(data);
-            alert("form successfully Uploaded");
+            formData.append("username", useparams.id);
+            formData.append("name", username)
+            formData.append("url", url);
+            formData.append("image", photo);
+            formData.append("select", select)
 
-            getData();
-        }).catch((err) => {
-            console.log(err);
-        })
+            axios.post("http://localhost:8000/addform", formData).then((data) => {
+                console.log(data);
+                alert("form successfully Uploaded");
+                getData();
+            }).catch((err) => {
+                console.log(err);
+            })
 
-        document.getElementById('kk').value = null;
-        document.getElementById('k').value = null;
-        document.getElementById('ff').value = null;
-        document.getElementById('f').value = null;
+            document.getElementById('kk').value = null;
+            document.getElementById('k').value = null;
+            document.getElementById('ff').value = null;
+            document.getElementById('f').value = null;
+        }
 
         // let pk = document.getElementById('kk');
         // pk.value = "";
@@ -81,7 +96,6 @@ function Form() {
 
     useEffect(() => {
         getData();
-        resetData();
     }, [])
 
     const getData = () => {
@@ -95,9 +109,58 @@ function Form() {
         })
     }
 
-    const resetData = () => {
+
+    const Validation = () => {
+        if (!isWebUri(url)) {
+            setIsError("invalid Url");
+            return false
+        }else if(url === ""){
+            setIsError1("Please fill url!!");
+            return false
+        }else if (photo === "") {
+            setIsError2("photo required!!")
+            return false
+        }else if(username === ""){
+            setIsError3("name is required!!");
+            return false
+        }
+        return true
+
 
     }
+
+
+    const handleChange = (e) => {
+        const id = e.target.id;
+        const values = e.target.value;
+
+        setUpdate((prevState) => ({
+            ...prevState,
+            [id] : values,
+        }))
+    }
+
+    const handlePhoto = (e) => {
+        const value = e.target.files[0];
+        const id1 = e.target.id
+
+        setphoto1((prevState) => ({
+            ...prevState,
+            [id1] : value
+        }))
+    }
+
+    const updateForm = (e) => {
+        e.preventDefault();
+
+        axios.put(`http://localhost:8000/formup/${Id}`,Update).then((data) => {
+            alert("success")
+            getData();
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+
 
     return (
         <div>
@@ -124,17 +187,6 @@ function Form() {
                 {userData.map((datas) => {
                     return (<div>
                         <div className='card'>
-
-                            <a className="btn-floating red right" onClick={()=>{
-                                axios.post(`http://localhost:8000/formdelete/${datas._id}`).then((data) =>{
-                                    console.log(data);
-                                    getData();
-                                }).catch((err) => {
-                                    console.log(err)
-                                })
-                            }}>
-                                <i className="material-icons">remove</i>
-                            </a>
                             <div className='card-content'>
                                 <div className='row s12'>
                                     <div className='col s3 center'>
@@ -148,9 +200,28 @@ function Form() {
                                     <div className='col s3 center'>
                                         <img src={`http://localhost:8000/${datas.image}`} style={{ height: "50px", width: "50px" }} />
                                     </div>
-
-                                    <div class="col s3 center">
+                                    <div class="col s3 ">
                                         <label>Status : {datas.select}</label>
+
+                                        <button className='btn green right modal-trigger ' data-target="change1" onClick={() => {
+                                            trigger();
+                                            setId(datas._id)
+                                            setUpdate({
+                                                name : datas.name,
+                                                url : datas.url,
+                                                select : datas.select,
+                                                image : datas.image
+                                            })
+                                        }}>
+                                            <i className="material-icons">edit</i>
+                                        </button><br />
+                                        <button className="btn red right modal-trigger style38" data-target="change" onClick={() => {
+                                            setDataId(datas._id);
+                                            trigger();
+                                        }}>
+                                            <i className="material-icons">remove</i>
+                                        </button>
+
                                     </div>
                                 </div>
                             </div>
@@ -172,14 +243,25 @@ function Form() {
 
                                 <div className='card'>
                                     <div className='card-content'>
+                                        <div className='center'>
+                                            <span style={{ color: "red" }}>{isError}</span>
+                                        </div>
+                                        <div className='center'>
+                                            <span style={{ color: "red" }}>{isError1}</span>
+                                        </div>
+                                        <div className='center'>
+                                            <span style={{ color: "red" }}>{isError2}</span>
+                                        </div>
+                                        <div className='center'>
+                                            <span style={{ color: "red" }}>{isError3}</span>
+                                        </div>
                                         <div className='row s12'>
                                             <div className='input-field col s3 '>
                                                 <input type="text" className="validate" id='kk' name='name' onChange={(e) => setusername(e.target.value)} required />
                                                 <label for="Adminpassword">Username</label>
                                             </div>
-
                                             <div className='input-field col s3 '>
-                                                <input type="url" id='k' className="validate" name='url' onChange={(e) => seturl(e.target.value)} required />
+                                                <input type="text" id='k' className="validate" name='url' onChange={(e) => seturl(e.target.value)} required />
                                                 <label for="Adminpassword">Url</label>
                                             </div>
 
@@ -206,6 +288,59 @@ function Form() {
                     </div>
                 </form>
             </div>
+
+            <div id="change" className="modal">
+                <form>
+                    <div className="modal-content">
+                        <h4 className='center'>Delete Your Address</h4>
+                        <p className='center'>Are You Sure ? you wnat to Delete your Address...!!!</p>
+                    </div>
+                    <div className="modal-footer">
+                        <button type='submit' className='btn mod modal-close indigo' onClick={() => {
+                            axios.post(`http://localhost:8000/formdelete/${DataId}`).then((data) => {
+                                console.log(data);
+                                getData();
+                            }).catch((err) => {
+                                console.log(err)
+                            })
+                        }}>Delete</button>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <div id="change1" className="modal">
+                <form encType="multipart/form-data">
+                    <div className="modal-content">
+                        <div className='row s12'>
+                            <div className='input-field col s3 '>
+                                <input type="text" className="validate" id='name' value={Update.name} name='name' onChange={handleChange} required />
+                            </div>
+
+                            <div className='input-field col s3 '>
+                                <input type="text" className="validate" id='url' value={Update.url} name='url' onChange={handleChange} required />
+                            </div>
+
+                            <div className='col s3 style36'>
+                                <input type='file' name='image' id='image' onChange={handlePhoto} accept=".png, .jpeg, .jpg" required/>
+                            </div>
+
+                            <div class="input-field col s3 style39">
+                                <select id='select' className="browser-default" value={Update.select} name='select' onChange={handleChange} required>
+                                    <option>Active</option>
+                                    <option >Inactive</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div className="modal-footer">
+                        <button className='btn indigo' onClick={updateForm}>Update</button>
+                    </div>
+                </form>
+            </div>
+
 
         </div>
     )

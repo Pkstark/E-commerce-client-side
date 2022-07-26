@@ -258,7 +258,7 @@ function ShippingAddress() {
                                             <button className='btn modal-trigger' data-target="change1" onClick={() => {
                                                 window.localStorage.setItem("id2", datas._id)
                                                 console.log(ids)
-                                                gest()     
+                                                gest()
 
                                                 setupdate({
                                                     flatno : datas.flatno,

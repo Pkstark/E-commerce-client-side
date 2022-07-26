@@ -175,3 +175,10 @@
   margin-top: 1%;
   border-radius: 5px;
 }
+.style38{
+  margin-top: 7%;
+  transform: perspective(100px)translateX(53px);
+}
+.style39{
+  margin-top: 2%;
+}
